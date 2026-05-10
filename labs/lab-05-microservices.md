@@ -1,0 +1,121 @@
+# Lab 5 — Microservices & Service Discovery
+
+In this lab you will deploy three loosely-coupled microservices behind Consul for service discovery. You will see how containers register themselves, how a client resolves a service by name (not IP), and how the fan-out pattern works when one service calls many.
+
+Run all commands on the Killercoda Ubuntu Playground:
+https://killercoda.com/playgrounds/scenario/ubuntu
+
+---
+
+## Step 1 — Install Docker and create a network
+
+```bash
+apt update && apt install -y docker.io curl jq
+systemctl start docker
+docker network create cloudnet
+```
+
+---
+
+## Step 2 — Run Consul (service registry)
+
+```bash
+docker run -d --name consul --network cloudnet \
+  -p 8500:8500 hashicorp/consul:latest \
+  agent -dev -client=0.0.0.0
+sleep 3
+curl -s http://localhost:8500/v1/status/leader
+```
+
+---
+
+## Step 3 — Deploy three microservices
+
+Each service is a tiny HTTP responder.
+
+```bash
+for n in users orders payments; do
+  docker run -d --name svc-$n --network cloudnet \
+    -e PORT=80 \
+    nginx:alpine
+  docker exec svc-$n sh -c "echo '{\"service\":\"$n\",\"ok\":true}' > /usr/share/nginx/html/index.html"
+done
+```
+
+---
+
+## Step 4 — Register them with Consul
+
+```bash
+for n in users orders payments; do
+  curl -s -X PUT -d "{
+    \"Name\": \"$n\",
+    \"Address\": \"svc-$n\",
+    \"Port\": 80,
+    \"Check\": {\"HTTP\": \"http://svc-$n/\", \"Interval\": \"10s\"}
+  }" http://localhost:8500/v1/agent/service/register
+done
+
+curl -s http://localhost:8500/v1/catalog/services | jq
+```
+
+---
+
+## Step 5 — Discover a service by name (DNS interface)
+
+Consul exposes service names over DNS on port 8600.
+
+```bash
+docker run --rm --network cloudnet --dns 172.17.0.1 alpine \
+  sh -c "apk add --quiet bind-tools && dig @consul -p 8600 users.service.consul"
+```
+
+Clients now resolve `users.service.consul` instead of hard-coded IPs — the **service discovery** primitive of every cloud-native platform.
+
+---
+
+## Step 6 — Fan-out call
+
+Simulate one request triggering parallel calls to all three services (event fan-out).
+
+```bash
+docker run --rm --network cloudnet alpine sh -c "
+  apk add --quiet curl
+  for s in users orders payments; do
+    (curl -s http://svc-$s/ &)
+  done
+  wait
+"
+```
+
+---
+
+## Step 7 — Loosely coupled: kill one service, others survive
+
+```bash
+docker stop svc-orders
+curl -s http://localhost:8500/v1/health/service/users | jq '.[].Checks[].Status'
+curl -s http://localhost:8500/v1/health/service/orders | jq '.[].Checks[].Status'
+```
+
+`users` stays `passing`, `orders` flips to `critical` — but the rest of the system keeps running. That is **loose coupling**.
+
+---
+
+## Step 8 — Cleanup
+
+```bash
+docker rm -f consul svc-users svc-orders svc-payments
+docker network rm cloudnet
+```
+
+---
+
+## What you learned
+- Microservices register and deregister with a service registry.
+- Clients resolve services by name, not IP — IPs come and go.
+- Fan-out and loose coupling are key cloud-native design patterns.
+
+## Free tools used
+- HashiCorp Consul — https://www.consul.io
+- Docker — https://www.docker.com
