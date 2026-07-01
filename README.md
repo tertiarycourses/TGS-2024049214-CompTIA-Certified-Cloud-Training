@@ -71,6 +71,16 @@ A complete set of **36 step-by-step labs** aligned to the CompTIA Cloud+ CV0-004
 
 ---
 
+## Courseware
+
+Full instructor-led courseware deliverables (all aligned to the 36 labs and the six CV0-004 exam domains) live in [courseware/](courseware/):
+
+- [Slide deck](courseware/CompTIA%20Cloud+%20Slides%20-%20v1.0.pptx) — `CompTIA Cloud+ Slides - v1.0.pptx` (with PDF export)
+- [Learner Guide](courseware/Learner%20Guide%20-%20CompTIA%20Cloud+%20-%20v1.0.docx) — `Learner Guide - CompTIA Cloud+ - v1.0.docx` (with PDF export)
+- [Lesson Plan](courseware/Lesson%20Plan%20-%20CompTIA%20Cloud+%20-%20v1.0.docx) — `Lesson Plan - CompTIA Cloud+ - v1.0.docx` (with PDF export)
+
+---
+
 ## Reference
 
 - [labs/tools.md](labs/tools.md) — Complete list of free tools (Killercoda + external)
