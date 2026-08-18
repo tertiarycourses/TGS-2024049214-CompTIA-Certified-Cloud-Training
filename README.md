@@ -172,11 +172,11 @@ The complete free-tool reference, with install commands and links, is in **[labs
 | **Course title** | WSQ CompTIA Certified Cloud+ Training |
 | **WSQ course code** | TGS-2024049214 |
 | **TSC** | Cloud Computing (ICT-DIT-5020-1.1) |
-| **Duration** | 2 days · 16 hours |
+| **Duration** | 2 days · 16 instructional hours (9:30 AM – 6:30 PM daily) |
 | **Level** | Intermediate — 2–3 years systems/cloud administration recommended |
-| **Assessment** | Written Assessment (WA) 1 hr + Practical Performance (PP) 90 min |
+| **Assessment** | Written Assessment (WA) 1 hr + Practical Performance (PP) 1 hr |
 | **Mode** | Classroom / synchronous e-learning · 100% hands-on |
-| **Certification target** | CompTIA Cloud+ CV0-004 — Maximum of 90, 90 minutes, pass 750 (on a scale of 100–900) |
+| **Certification target** | CompTIA Cloud+ CV0-004 — maximum of 90 questions, 90 minutes, pass 750 (scale 100–900) |
 | **Training provider** | Tertiary Infotech Academy Pte Ltd · UEN 201200696W |
 
 ### Funding
