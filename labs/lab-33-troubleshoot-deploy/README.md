@@ -137,6 +137,22 @@ Not every cloud service exists in every region. The fix is preventive — read t
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+docker run --rm --memory=128m alpine sh -c "yes | head -c 50m >/dev/null && echo OK"
+docker run --rm alpine:3.10 cat /etc/alpine-release
+docker ps -a --filter name=web --format '{{.Names}}\t{{.Status}}'
+for i in $(seq 1 20); do curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8081/; done | sort | uniq -c
+docker stats --no-stream
+```
+
+**Expected:** Run each check at the point in the lab where its container still exists. The correctly-sized 128m container prints `OK` where the 10m one was OOM-killed; `alpine:3.10` prints `3.10.9` — an end-of-life release; the paused `web` container shows status `Up ... (Paused)` and `curl` times out until you `docker unpause` it and get `HTTP/1.1 200 OK`; and the 20 requests to the un-throttled responder all tally as `200` (a real cloud API would return `429` once the quota is hit).
+
+---
+
 ## What you learned
 - Reproduce each CV0-004 6.1 failure mode locally.
 - Read logs/metrics first, fix the parameter that matches the symptom.

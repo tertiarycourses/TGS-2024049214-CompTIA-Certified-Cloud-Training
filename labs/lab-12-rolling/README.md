@@ -110,6 +110,21 @@ cd /tmp/rolling && docker compose down
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+cd /tmp/rolling && docker compose ps
+docker compose ps -q app | wc -l
+for i in $(seq 1 9); do curl -s http://localhost/; done
+docker compose logs lb --tail 5
+```
+
+**Expected:** Run this before Step 5. `docker compose ps` shows the `lb` service plus the app replicas all in state **running**, the replica count is exactly `3`, and the nine `curl` calls return `v1 from <hostname>` cycling through three different container hostnames — proving HAProxy still balanced across surviving replicas while each one was replaced.
+
+---
+
 ## What you learned
 - Rolling = replace replicas one (or batch) at a time.
 - Cheaper than blue-green but produces a brief mixed-version window.

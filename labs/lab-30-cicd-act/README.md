@@ -156,6 +156,22 @@ rm -rf /tmp/cicd
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+act --version
+cd /tmp/cicd && ls .github/workflows/ci.yml
+act -l
+act -j test
+git -C /tmp/cicd log --oneline
+```
+
+**Expected:** Run this before Step 8. `act` prints its version; the workflow file exists; `act -l` lists all four jobs (`test`, `build`, `scan`, `deploy`) with their `needs` dependencies; re-running `act -j test` ends with a green **`Job succeeded`** line after `pytest` reports `1 passed`; and the repo has the `ci` commit.
+
+---
+
 ## What you learned
 - A pipeline is YAML + jobs + dependencies.
 - act lets you iterate without pushing.

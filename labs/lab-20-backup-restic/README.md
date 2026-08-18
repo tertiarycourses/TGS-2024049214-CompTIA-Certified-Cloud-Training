@@ -132,6 +132,22 @@ rm -rf /data/app /restore
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+restic snapshots
+restic stats latest
+restic check --read-data-subset=10%
+ls -lh /data/app/
+docker exec minio mc ls local/backups/
+```
+
+**Expected:** Run this before Step 11. `restic snapshots` lists three snapshots tagged `full`, `incremental` and `diff`; `restic stats` reports the restored size of the latest snapshot; `restic check` ends with **no errors were found**; `/data/app/` contains `file1`–`file4` again after the Step 7 bulk restore; and the MinIO `backups` bucket holds the restic repository objects (`config`, `data/`, `snapshots/`).
+
+---
+
 ## What you learned
 - Encrypted, deduplicated backups to S3-compatible storage.
 - Full / incremental / differential semantics.

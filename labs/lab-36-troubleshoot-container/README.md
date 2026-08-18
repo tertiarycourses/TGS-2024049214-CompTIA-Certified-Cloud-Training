@@ -143,6 +143,22 @@ You have now hit every CV0-004 troubleshooting category:
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+docker ps -a --filter name=crash --format '{{.Names}}\t{{.Status}}'
+docker inspect oom --format='{{.State.OOMKilled}} {{.State.ExitCode}}'
+docker run --rm --read-only --tmpfs /tmp alpine sh -c "echo x > /tmp/y && cat /tmp/y"
+docker run --rm --dns 1.1.1.1 alpine nslookup example.com | tail -3
+/tmp/triage.sh demo
+```
+
+**Expected:** Run each check while that step's container still exists. The `crash` container cycles through `Restarting (1)` / `Exited (1)` — the Docker equivalent of CrashLoopBackOff; `docker inspect oom` prints **`true 137`**, the OOMKilled smoking gun; the read-only container with a tmpfs mount succeeds and prints `x` where the plain `--read-only` run failed with *Read-only file system*; the DNS lookup resolves `example.com`; and `triage.sh demo` prints the State / Logs / Stats / Mounts / Network sections for the running nginx container.
+
+---
+
 ## What you learned
 - Read state, logs, stats, mounts, network — in that order.
 - OOM, CrashLoop, ImagePull, DNS, RO-fs are the daily five.

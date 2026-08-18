@@ -101,6 +101,22 @@ docker rm -f iaas-vm paas-db saas-app
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+docker ps --filter name=iaas-vm --filter name=paas-db --filter name=saas-app
+docker exec iaas-vm service nginx status
+docker exec paas-db psql -U postgres -lqt | grep app
+curl -sI http://localhost:8080 | head -1
+echo '{"name":"Cloud+"}' | python3 /tmp/faas/handler.py
+```
+
+**Expected:** Run this before Step 7. `docker ps` lists all three containers (`iaas-vm`, `paas-db`, `saas-app`) as **Up**, nginx inside `iaas-vm` reports *nginx is running*, the `app` database appears in the Postgres list, Nextcloud answers with an `HTTP/1.1 200 OK` or `302 Found` status line, and the FaaS handler prints `{"hello": "Cloud+"}`.
+
+---
+
 ## What you learned
 - Hands-on difference between IaaS, PaaS, SaaS, and FaaS.
 - Who patches the OS, who owns the data, and who runs the runtime in each model.

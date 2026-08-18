@@ -123,6 +123,22 @@ iptables -t nat -F POSTROUTING
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+ip netns list
+ip netns exec subnet-a ip route show
+ip netns exec subnet-a ping -c 2 10.0.2.10
+ip netns exec router iptables -L FORWARD -n --line-numbers
+ip netns exec subnet-a ping -c 2 -W 2 8.8.8.8
+```
+
+**Expected:** Run this before Step 7. `ip netns list` shows `subnet-a`, `subnet-b` and `router`; `subnet-a` has a `default via 10.0.1.1` route; the ping to `10.0.2.10` gets **2 packets transmitted, 2 received, 0% packet loss** across the router (VPC peering works); the FORWARD chain shows the `DROP ... icmp` rule from 10.0.2.0/24 to 10.0.1.0/24 (the security group); and the ping to `8.8.8.8` leaves through the NAT MASQUERADE rule.
+
+---
+
 ## What you learned
 - VPCs, subnets, route tables, security groups, and NAT gateways are kernel features.
 - Peering = a route + a forwarding rule.

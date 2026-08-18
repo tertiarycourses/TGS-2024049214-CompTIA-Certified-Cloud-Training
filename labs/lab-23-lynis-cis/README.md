@@ -108,6 +108,22 @@ sysctl --system >/dev/null
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+grep "Hardening index" /var/log/lynis.log
+lynis show warnings
+lynis show suggestions | head -20
+ls -l /etc/shadow /etc/passwd
+sysctl net.ipv4.tcp_syncookies kernel.randomize_va_space net.ipv4.conf.all.send_redirects
+```
+
+**Expected:** Run this before Step 8. The log shows a `Hardening index : NN [######  ]` line that is **higher after the Step 6 re-audit than the Step 2 baseline**; `/etc/shadow` is `-rw-------` (600) and `/etc/passwd` is `-rw-r--r--` (644); and the kernel now reports `net.ipv4.tcp_syncookies = 1`, `kernel.randomize_va_space = 2` and `net.ipv4.conf.all.send_redirects = 0` from the hardening sysctl file.
+
+---
+
 ## What you learned
 - Benchmarks are objective targets you can measure against.
 - Hardening = closing the gap between current and benchmark.

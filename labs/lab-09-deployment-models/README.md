@@ -102,6 +102,21 @@ docker rm -f public-cloud private-cloud
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+curl -s http://localhost:4566/_localstack/health | head -c 200
+aws --endpoint-url=http://localhost:4566 s3 ls
+aws --endpoint-url=http://localhost:4566 s3 ls s3://public-bucket/
+docker exec private-cloud mc ls local/private-bucket/
+```
+
+**Expected:** Run this before Step 7. LocalStack's health endpoint reports `s3` as `"available"` or `"running"`; `s3 ls` lists `public-bucket`; and **the same object `data.txt` appears in both** the LocalStack `public-bucket` listing and the MinIO `private-bucket` listing — the hybrid copy succeeded across the two clouds.
+
+---
+
 ## What you learned
 - Public, private, hybrid, and community models differ in tenancy and control.
 - The **API** can stay the same (S3) across deployment models.

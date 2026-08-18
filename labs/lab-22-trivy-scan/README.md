@@ -105,6 +105,22 @@ Non-zero exit fails the build — this is the "gate" that stops vulnerable image
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+trivy --version
+trivy image --severity HIGH,CRITICAL alpine:3.10 | tail -20
+trivy image --severity CRITICAL alpine:3.20 | tail -10
+trivy config /tmp/tf-bad
+trivy fs --security-checks vuln,secret /etc | head -20
+```
+
+**Expected:** Trivy prints its version and a vulnerability DB date; the `alpine:3.10` scan lists **multiple HIGH/CRITICAL CVEs** with CVE IDs, installed and fixed versions; the same scan of `alpine:3.20` reports **no CRITICAL vulnerabilities** (`Total: 0`), showing that bumping the base image is the remediation; and `trivy config` flags the `/tmp/tf-bad/main.tf` public-read S3 bucket as a HIGH misconfiguration.
+
+---
+
 ## What you learned
 - Vulnerability scanning closes the **identify** step.
 - CVE + CVSS is the universal vocabulary.

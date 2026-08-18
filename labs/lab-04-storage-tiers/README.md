@@ -106,6 +106,22 @@ systemctl stop nfs-kernel-server
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+df -h /mnt/block /mnt/file
+mount | grep -E 'loop|nfs'
+docker exec minio mc ls local/hot-bucket/
+cat /srv/nfs/test.txt
+exportfs -v
+```
+
+**Expected:** Run this before Step 7. `/mnt/block` shows a ~250M ext4 filesystem on a `/dev/loop*` device and `/mnt/file` shows the `127.0.0.1:/srv/nfs` NFS mount; `mc ls` lists `file.txt` in `hot-bucket`; `cat` prints `shared` (proving the NFS write landed in `/srv/nfs`); and `exportfs -v` shows `/srv/nfs` exported with `rw`.
+
+---
+
 ## What you learned
 - Block, object, and file storage have different APIs and access patterns.
 - IOPS varies by an order of magnitude between tiers.

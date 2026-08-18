@@ -117,6 +117,21 @@ docker rm -f pg mongo
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+docker ps --filter name=pg --filter name=mongo --format '{{.Names}}\t{{.Status}}'
+PGPASSWORD=cloud psql -h 127.0.0.1 -U postgres -c "\dt"
+PGPASSWORD=cloud psql -h 127.0.0.1 -U postgres -c "SELECT c.name, SUM(o.amount) FROM customers c JOIN orders o ON o.customer_id=c.id GROUP BY c.name;"
+docker exec -i mongo mongosh --quiet --eval 'db.getSiblingDB("shop").customers.countDocuments({})'
+```
+
+**Expected:** Run this before Step 7. Both `pg` and `mongo` are **Up**; `\dt` lists the `customers` and `orders` tables; the JOIN returns `Alice | 111.50` and `Bob | 5.00`; and MongoDB reports `2` customer documents — the same business data expressed relationally and as nested documents.
+
+---
+
 ## What you learned
 - Relational vs non-relational data models.
 - Self-managed vs provider-managed responsibility split.

@@ -122,6 +122,21 @@ rm -f /var/vm/vm*.qcow2 /var/vm/alpine-virt-3.19.1-x86_64.iso
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+qemu-img info /var/vm/vm1.qcow2
+qemu-img info /var/vm/vm2.qcow2 | grep -i backing
+ls -lh /var/vm/vm*.qcow2
+egrep -c '(vmx|svm)' /proc/cpuinfo
+```
+
+**Expected:** Run this before Step 9. `vm1.qcow2` reports `file format: qcow2` with a 2.0 GiB virtual size; `vm2.qcow2` names `vm1.qcow2` as its **backing file** and its on-disk size is only a few hundred KB versus vm1's — proof the linked clone stores deltas only; the CPU flag count is a number (non-zero means the host supports hardware-assisted virtualization).
+
+---
+
 ## What you learned
 - Create and clone qcow2 disks.
 - VM networks: user-mode, bridged, overlay.

@@ -127,6 +127,22 @@ docker rm -f localstack
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+cd /tmp/tf && terraform state list
+terraform state show aws_s3_bucket.data | head -10
+terraform plan -detailed-exitcode
+docker exec localstack awslocal s3 ls
+git -C /tmp/tf log --oneline
+```
+
+**Expected:** Run this before Step 7. `terraform state list` prints `aws_s3_bucket.data`; `state show` reports the bucket name (`cloudplus-prod-data` after Step 6); `terraform plan` reports **No changes. Your infrastructure matches the configuration** (exit code 0) once applied, or lists the drifted tag if you run it before re-applying; `awslocal s3 ls` shows the bucket really exists in LocalStack; and `git log` shows the `initial infra` commit.
+
+---
+
 ## What you learned
 - IaC: declarative config → cloud resources.
 - Plan before apply.

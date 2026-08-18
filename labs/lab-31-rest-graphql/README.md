@@ -123,6 +123,21 @@ docker rm -f gql echo redis 2>/dev/null
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+curl -s https://jsonplaceholder.typicode.com/posts/1 | jq '.id, .title'
+curl -s http://localhost:4000/graphql -H 'Content-Type: application/json' -d '{"query":"{ hello(name:\"Cloud+\") }"}' | jq
+echo "hello-stream" | websocat -n1 ws://localhost:8765/.ws
+docker ps --filter name=gql --filter name=echo --filter name=redis --format '{{.Names}}\t{{.Status}}'
+```
+
+**Expected:** Run this before Step 7. The REST call returns post `1` with its title (stateless GET over HTTP); the GraphQL query returns exactly `{"data":{"hello":"Hello Cloud+"}}` — only the field you asked for, nothing more; `websocat` echoes `hello-stream` back over the open WebSocket; and all three containers (`gql`, `echo`, `redis`) are **Up**.
+
+---
+
 ## What you learned
 - REST CRUD with curl.
 - GraphQL queries return only requested fields.

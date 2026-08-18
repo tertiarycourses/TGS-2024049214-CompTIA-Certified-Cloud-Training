@@ -114,6 +114,22 @@ docker rm -f node prom grafana
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+curl -s http://localhost:9100/metrics | head -5
+curl -s 'http://localhost:9090/api/v1/targets' | jq '.data.activeTargets[].health'
+curl -s 'http://localhost:9090/api/v1/query?query=up' | jq '.data.result[].value[1]'
+curl -s -u admin:cloud http://localhost:3000/api/health
+curl -s 'http://localhost:9090/api/v1/alerts' | jq '.data.alerts[].state'
+```
+
+**Expected:** Run this before Step 7. node-exporter returns Prometheus text metrics (`# HELP ...` lines); the Prometheus target health is `"up"` and the `up` query returns `"1"`; Grafana's health endpoint returns `"database": "ok"`; and while `stress-ng` is loading the CPU the alerts endpoint shows the `HighCPU` alert in state `"pending"` and then `"firing"` after ~30 seconds.
+
+---
+
 ## What you learned
 - Scrape metrics, visualise, and alert on thresholds.
 - Aggregation and retention are configured in Prometheus.

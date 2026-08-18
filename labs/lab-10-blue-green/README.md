@@ -90,6 +90,22 @@ systemctl stop nginx
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+docker ps --filter name=blue --filter name=green --format '{{.Names}}\t{{.Status}}'
+curl -s http://localhost:8081/
+curl -s http://localhost:8082/
+nginx -t
+curl -s http://localhost/
+```
+
+**Expected:** Run this before Step 7. Both `blue` and `green` are **Up**; port 8081 returns `v1 BLUE` and port 8082 returns `v2 GREEN` (both environments live); `nginx -t` prints `syntax is ok` / `test is successful`; and port 80 returns whichever colour the upstream currently points at — `v1 BLUE` after the Step 6 rollback.
+
+---
+
 ## What you learned
 - Blue-green keeps two parallel environments; cutover is a config change.
 - Rollback is symmetrical and fast.

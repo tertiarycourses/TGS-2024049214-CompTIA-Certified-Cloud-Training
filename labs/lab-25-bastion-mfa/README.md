@@ -120,6 +120,23 @@ ufw disable 2>/dev/null
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+ss -ltn | grep :22
+ssh -o StrictHostKeyChecking=no localhost "echo SSH key auth OK"
+grep -E '^(PasswordAuthentication|PubkeyAuthentication|AuthenticationMethods)' /etc/ssh/sshd_config
+ls -l /root/.google_authenticator
+grep pam_google_authenticator /etc/pam.d/sshd
+ufw status verbose
+```
+
+**Expected:** Run this before Step 8. `ss` shows sshd LISTENing on port 22; the key-based SSH prints `SSH key auth OK` with no password prompt; the sshd config reads `PasswordAuthentication no`, `PubkeyAuthentication yes` and `AuthenticationMethods publickey,keyboard-interactive`; the `/root/.google_authenticator` TOTP seed file exists with `-r--------` permissions; PAM includes the `pam_google_authenticator.so` line; and `ufw status` shows port 22 allowed only from `10.0.0.0/8`.
+
+---
+
 ## What you learned
 - SSH key auth, MFA via TOTP, and bastion jump-hosts.
 - AuthenticationMethods chains factors.

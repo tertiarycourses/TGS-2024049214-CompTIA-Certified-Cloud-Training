@@ -131,6 +131,22 @@ docker volume rm app-data
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+docker images | grep -E 'myapp|alpine|hello-world'
+curl -s http://localhost:8080
+docker run --rm -v app-data:/data alpine cat /data/keep.txt
+curl -s http://localhost:5000/v2/_catalog
+docker compose -f /tmp/docker-compose.yml ps
+```
+
+**Expected:** Run this before Step 9. `myapp:1.0` (plus `alpine:3.20` and `hello-world`) appear in the image list; `curl` on port 8080 returns `<h1>Cloud+ container</h1>`; the volume read prints `durable`, proving the named volume outlived the container; the local registry catalog returns `{"repositories":["myapp"]}`; and `docker compose ps` shows the `web` and `cache` services running.
+
+---
+
 ## What you learned
 - Build, tag, run, and push images.
 - Port mapping vs persistent volumes vs ephemeral storage.

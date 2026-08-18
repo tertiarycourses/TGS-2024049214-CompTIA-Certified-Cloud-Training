@@ -120,6 +120,21 @@ systemctl stop haproxy
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+docker ps --filter name=v1 --filter name=v2 --format '{{.Names}}\t{{.Status}}'
+systemctl is-active haproxy
+grep -E 'server v[12]' /etc/haproxy/haproxy.cfg
+for i in $(seq 1 20); do curl -s http://localhost/; done | sort | uniq -c
+```
+
+**Expected:** Run this before Step 7. Both `v1` and `v2` containers are **Up** and `haproxy` is `active`; the config shows the current weights for each server; and the 20-request tally matches those weights — roughly 18 `v1` / 2 `v2` at 90/10, about 10/10 at 50/50, and `20 v2` once v2 is promoted to 100%.
+
+---
+
 ## What you learned
 - Canary = small percentage of real traffic on a new version.
 - Weight-based routing lets you ramp gradually and rollback instantly.

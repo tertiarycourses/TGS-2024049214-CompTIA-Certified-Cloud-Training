@@ -136,6 +136,22 @@ rm -rf /tmp/work
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+curl -sI http://localhost:3000 | head -1
+curl -s -u admin:cloudplus http://localhost:3000/api/v1/repos/admin/infra/branches | jq '.[].name'
+curl -s -u admin:cloudplus http://localhost:3000/api/v1/repos/admin/infra/pulls?state=all | jq '.[] | {title, state}'
+cd /tmp/work/infra && git log --oneline --graph --all | head -15
+grep -c '<<<<<<<' main.tf
+```
+
+**Expected:** Run this before Step 9. Gitea returns `HTTP/1.1 200 OK`; the branch list contains `main`, `feature/encryption` and `feature/region`; the PR query shows `{"title":"Add SSE","state":"closed"}` — closed because it was merged; the commit graph shows the feature branches joining `main` at a merge commit; and `grep -c` returns `0`, proving the conflict markers were resolved before the final commit.
+
+---
+
 ## What you learned
 - Commit → push → branch → PR → merge.
 - Conflict resolution is a normal Git workflow.

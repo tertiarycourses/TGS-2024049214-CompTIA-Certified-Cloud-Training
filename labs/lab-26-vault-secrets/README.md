@@ -116,6 +116,22 @@ docker rm -f vault pg
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+docker exec vault vault status
+docker exec -e VAULT_TOKEN=cloudplus vault vault kv get secret/app/db
+docker exec -e VAULT_TOKEN=cloudplus vault vault kv get -version=1 secret/app/db
+docker exec -e VAULT_TOKEN=cloudplus vault vault read database/creds/readonly
+docker exec vault tail -3 /vault/logs/audit.log
+```
+
+**Expected:** Run this before Step 7. `vault status` shows `Sealed  false` and `Initialized  true`; the current secret reads back at **version 2** with `password  Rotat3d!` while `-version=1` still returns `Sup3rSecret` (versioned rollback works); `database/creds/readonly` mints a fresh username like `v-root-readonly-<random>` with `lease_duration  2m`; and the audit log tail shows JSON entries recording each secret read.
+
+---
+
 ## What you learned
 - Static and dynamic secrets.
 - Versioning, audit, lease/expiry.

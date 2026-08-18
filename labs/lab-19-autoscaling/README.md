@@ -111,6 +111,21 @@ docker compose down
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+cd /tmp/scale && docker compose ps
+docker compose ps -q app | wc -l
+crontab -l
+docker stats --no-stream --format '{{.Name}}\t{{.CPUPerc}}'
+```
+
+**Expected:** Run this before Step 7. `docker compose ps` shows every `app` replica **running**, the replica count sits between the controller's MIN of 2 and MAX of 6 (it rises toward 6 while `stress-ng` runs and falls back to 2 afterwards), `crontab -l` shows the scheduled `--scale app=4` entry, and `docker stats` reports live CPU for each replica.
+
+---
+
 ## What you learned
 - Triggered, scheduled, and manual scaling.
 - A scaler is just a control loop watching a metric.

@@ -148,6 +148,24 @@ kubectl delete pvc data
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+kubectl get nodes
+kubectl get deploy,pods,svc -l app=web
+kubectl rollout history deploy/web
+kubectl get pvc data
+kubectl auth can-i list pods --as alice
+curl -s http://localhost:30080 | head -3
+```
+
+**Expected:** Run this before Step 9. The node reports status **Ready**; the `web` Deployment shows `5/5` ready pods (after the Step 3 scale) all in `Running`; `rollout history` lists at least two revisions from the `nginx:1.26-alpine` → `1.27-alpine` update; the `data` PVC is **Bound** to a `local-path` volume; `kubectl auth can-i list pods --as alice` answers **yes** (while `delete pods` answers **no**); and the NodePort on 30080 returns the nginx welcome HTML.
+
+---
+
 ## What you learned
 - k3s gives you a real cluster in one shell command.
 - Deployments, services, scaling, rolling updates, RBAC.

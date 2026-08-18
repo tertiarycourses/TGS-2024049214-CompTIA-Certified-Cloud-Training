@@ -114,6 +114,21 @@ docker rm -f target falco fsk 2>/dev/null
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+falco --version || docker ps --filter name=falco --format '{{.Names}}\t{{.Status}}'
+journalctl -u falco -n 30 --no-pager 2>/dev/null || docker logs --tail 30 falco
+docker ps --filter name=target --format '{{.Names}}\t{{.Status}}'
+curl -sI http://localhost:2801/ping | head -1
+```
+
+**Expected:** Run this before Step 8. Falco reports its version (or the container is **Up**); the event log contains one line per trigger — `A shell was spawned in a container`, `Read sensitive file untrusted` for the `/etc/shadow` read, and `Unexpected outbound connection` for the wget — each tagged with the `target` container's ID; and falcosidekick answers on port 2801.
+
+---
+
 ## What you learned
 - Runtime detection uses kernel signals (eBPF) to spot bad behaviour.
 - Common detections map to CV0-004 attack categories.

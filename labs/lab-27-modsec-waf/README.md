@@ -107,6 +107,23 @@ docker rm -f waf
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+docker ps --filter name=waf --format '{{.Names}}\t{{.Status}}'
+curl -s -o /dev/null -w "benign=%{http_code}\n" "http://localhost/?q=cats"
+curl -s -o /dev/null -w "sqli=%{http_code}\n" "http://localhost/?id=1' OR '1'='1"
+curl -s -o /dev/null -w "xss=%{http_code}\n" "http://localhost/?msg=<script>alert(1)</script>"
+curl -s -o /dev/null -w "lfi=%{http_code}\n" "http://localhost/?file=../../../../etc/passwd"
+docker exec waf tail -20 /var/log/modsec/modsec_audit.log
+```
+
+**Expected:** Run this before Step 9. The `waf` container is **Up**; the benign request returns `benign=200` while all three attacks return **403** (`sqli=403`, `xss=403`, `lfi=403`); and the audit log tail shows the matching OWASP CRS rule IDs — 942100 for SQLi, 941100 for XSS and 930100 for path traversal — together with the anomaly score that crossed the threshold of 5.
+
+---
+
 ## What you learned
 - WAFs operate on HTTP semantics, not just IP/port.
 - OWASP CRS catches the OWASP Top 10 out of the box.

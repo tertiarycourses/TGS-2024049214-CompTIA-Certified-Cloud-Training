@@ -136,6 +136,22 @@ rm -rf /tmp/leak
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+echo | openssl s_client -connect localhost:8443 -tls1_3 2>&1 | grep -E '(alert|Protocol)' | head -3
+echo | openssl s_client -connect localhost:8443 -tls1 2>&1 | grep 'Protocol' | head -1
+ausearch -k sudo-changes 2>/dev/null | tail -5
+find / -perm -4000 -type f 2>/dev/null | head -10
+docker run --rm -v /tmp/leak:/repo zricethezav/gitleaks:latest detect -s /repo --no-git -v 2>&1 | head -20
+```
+
+**Expected:** Run the TLS checks while the `oldssl` container from Step 2 is still running. The TLS 1.3 client is **refused** (handshake failure / alert) while the `-tls1` client negotiates `Protocol : TLSv1` — proving the server only offers a deprecated version; `ausearch` shows an audit record for the write to `/etc/sudoers` under key `sudo-changes`; the SUID list includes the usual `/usr/bin/sudo`, `/usr/bin/passwd` and friends; and gitleaks reports **2 leaks** in `config.py`, naming the AWS access key and secret it found.
+
+---
+
 ## What you learned
 - Negotiate TLS versions and ciphers from the CLI.
 - Detect privesc, brute force, and leaked secrets.

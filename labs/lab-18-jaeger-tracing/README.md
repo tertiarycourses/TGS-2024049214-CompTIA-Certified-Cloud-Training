@@ -102,6 +102,21 @@ docker rm -f jaeger
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+curl -sI http://localhost:16686 | head -1
+curl -s "http://localhost:16686/api/services" | jq '.data'
+curl -s "http://localhost:16686/api/traces?service=shop&limit=5" | jq '.data | length'
+curl -s "http://localhost:16686/api/traces?service=shop&limit=1" | jq '[.data[0].spans[].operationName]'
+```
+
+**Expected:** Run this before Step 6. Jaeger's UI returns `HTTP/1.1 200 OK`, the services list includes `"shop"`, the trace query returns **5 traces** (one per `checkout()` iteration), and each trace's span list contains `http.checkout` with its two children `db.lookup` and `payment.charge`.
+
+---
+
 ## What you learned
 - Spans are the unit of tracing; traces are causally-linked spans.
 - OpenTelemetry is the vendor-neutral instrumentation API.

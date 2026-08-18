@@ -132,6 +132,22 @@ Same API. Same Kibana clone is OpenSearch Dashboards.
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+curl -s http://localhost:9200/_cluster/health | jq '.status'
+curl -s 'http://localhost:9200/_cat/indices?v'
+curl -s 'http://localhost:9200/logs-*/_search?q=event' | jq '.hits.total.value'
+curl -s http://localhost:5601/api/status | head -c 200
+curl -s http://localhost:9200/_ilm/policy/logs-retention | jq '.["logs-retention"].policy.phases.delete.min_age'
+```
+
+**Expected:** Run this before Step 8. Elasticsearch's cluster status is `"green"` or `"yellow"` (yellow is normal for single-node); `_cat/indices` lists a `logs-YYYY.MM.DD` index; the search reports a hit total of **20** — the 20 syslog lines Logstash ingested; Kibana's status shows `"level":"available"`; and the ILM policy returns `"7d"`, confirming the 7-day retention rule.
+
+---
+
 ## What you learned
 - Centralized logging pipeline: collect → ship → store → query.
 - Retention is enforced with ILM policies.

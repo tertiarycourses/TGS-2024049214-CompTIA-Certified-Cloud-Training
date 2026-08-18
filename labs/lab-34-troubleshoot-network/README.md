@@ -138,6 +138,23 @@ In cloud, the equivalent is wrong **subnet → route table** association.
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+docker run --rm --dns 1.1.1.1 alpine nslookup example.com | tail -3
+chronyc tracking 2>/dev/null | head -5 || timedatectl
+ip route get 8.8.8.8
+curl -s -o /dev/null -w "root=%{http_code}\n" http://localhost:8080/
+curl -s -o /dev/null -w "missing=%{http_code}\n" http://localhost:8080/missing
+ping -c 4 1.1.1.1 | tail -2
+```
+
+**Expected:** Run the HTTP checks while the `web` container from Step 5 is still running. The good resolver returns an `Address:` line for `example.com` (the `192.0.2.1` resolver returned SERVFAIL / no servers reachable); chrony or `timedatectl` shows a synchronised clock; `ip route get 8.8.8.8` names the outgoing interface and `via` gateway the kernel selected; the two curls return `root=200` and `missing=404` — the 4xx localises the fault to the client request, not the server; and the ping summary shows `0% packet loss` with an average RTT.
+
+---
+
 ## What you learned
 - A ladder of checks from L2 → L7.
 - HTTP status codes localise the failure layer.

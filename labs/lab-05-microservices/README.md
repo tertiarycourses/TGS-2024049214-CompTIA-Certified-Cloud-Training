@@ -111,6 +111,21 @@ docker network rm cloudnet
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+curl -s http://localhost:8500/v1/status/leader
+curl -s http://localhost:8500/v1/catalog/services | jq
+curl -s http://localhost:8500/v1/health/service/users | jq '.[].Checks[].Status'
+docker ps --filter name=svc- --format '{{.Names}}\t{{.Status}}'
+```
+
+**Expected:** Run this before Step 8. Consul returns a leader address such as `"127.0.0.1:8300"`, the catalog lists `users`, `orders` and `payments` alongside `consul`, the `users` health check returns `"passing"`, and all three `svc-*` containers are **Up** (after Step 7, `svc-orders` is stopped and its check reads `"critical"` while `users` stays `"passing"` — that is the loose coupling).
+
+---
+
 ## What you learned
 - Microservices register and deregister with a service registry.
 - Clients resolve services by name, not IP — IPs come and go.

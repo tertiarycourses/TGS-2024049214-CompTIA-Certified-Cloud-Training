@@ -137,6 +137,21 @@ apt remove -y nginx
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+cd /tmp/ans && ansible-playbook -i inventory.ini site.yml --check
+systemctl is-active nginx
+curl -s http://localhost
+ls /tmp/ans/roles/myweb
+```
+
+**Expected:** Run this before Step 9. The `--check` dry run finishes with `changed=0` and `failed=0` in the PLAY RECAP — the host already matches the desired state, which is the proof of **idempotency**; `nginx` reports `active`; `curl` returns `<h1>Configured by Ansible</h1>` (Ansible re-applied the page after you drifted it); and the role skeleton lists `tasks`, `handlers`, `defaults`, `vars` and friends.
+
+---
+
 ## What you learned
 - Playbooks are YAML.
 - Idempotent tasks: only act if state differs.

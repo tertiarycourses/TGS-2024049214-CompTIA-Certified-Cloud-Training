@@ -118,6 +118,22 @@ rm -rf /tmp/data
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+cd /tmp/data && jq . server.json
+jq '.tags | length' server.json
+yq . server.yaml
+diff <(jq -S . server.json) <(jq -S . server-from-yaml.json) && echo "Same data, two formats"
+jq 'if .ram_gb < 8 then "undersized" else "ok" end' server.json
+```
+
+**Expected:** Run this before Step 8. `jq` pretty-prints the JSON without a parse error, the `tags` array length is `2`, `yq` renders the YAML as the same JSON object, the `diff` produces **no output** and prints `Same data, two formats`, and the conditional evaluates to `"undersized"` because `ram_gb` is 4.
+
+---
+
 ## What you learned
 - Read, write, validate, and convert JSON ↔ YAML.
 - Scripting logic primitives at the data-format level.

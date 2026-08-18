@@ -129,6 +129,22 @@ docker rm -f kc
 
 ---
 
+## Test it
+
+Run these checks to prove the lab worked before you move on:
+
+```bash
+curl -sI http://localhost:8080/realms/master | head -1
+curl -s http://localhost:8080/admin/realms -H "Authorization: Bearer $TOKEN" | jq '.[].realm'
+curl -s http://localhost:8080/admin/realms/cloudplus/roles -H "Authorization: Bearer $TOKEN" | jq '.[].name'
+curl -s "http://localhost:8080/admin/realms/cloudplus/users?username=alice" -H "Authorization: Bearer $TOKEN" | jq '.[].username'
+echo "$ALICE_TOKEN" | cut -d. -f2 | base64 -d 2>/dev/null | jq .realm_access
+```
+
+**Expected:** Run this before Step 9. Keycloak answers `HTTP/1.1 200 OK` on the master realm; the realm list includes `"cloudplus"` next to `"master"`; the role list contains `viewer`, `operator` and `admin`; the user query returns `"alice"`; and Alice's decoded JWT payload shows `"roles"` containing **`"operator"`** — the RBAC assignment travelled in the token claim.
+
+---
+
 ## What you learned
 - Identity provider, realms, users, roles, clients.
 - OAuth 2.0 + OIDC token flow.
