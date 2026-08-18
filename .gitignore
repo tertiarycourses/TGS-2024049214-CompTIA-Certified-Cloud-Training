@@ -16,3 +16,5 @@
 
 # LibreOffice lock files
 .~lock.*#
+# LibreOffice temp files
+lu*.tmp
