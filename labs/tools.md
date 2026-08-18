@@ -11,6 +11,17 @@ Killercoda playground (free, no signup): https://killercoda.com/playgrounds/scen
 
 ---
 
+## Section 0 — Free browser web tools (no install, use alongside any lab)
+
+| Tool | Purpose | Used in | Link |
+|------|---------|---------|------|
+| **IP Calculator** | Subnet/CIDR planning — plan the VPC subnets before you build them | Lab 3, 34 | https://alfredang.github.io/ipcalculator/ |
+| **PCAP Analyzer** | Inspect packet captures from `tcpdump` in the browser | Lab 34 | https://alfredang.github.io/pcapanalyzer/ |
+| **Regex Generator** | Build grok/regex patterns for Logstash log parsing | Lab 17 | https://alfredang.github.io/regexgenerator/ |
+| **Cybersecurity Simulator** | Practise attack/defence scenarios covered by the security labs | Labs 22–28, 35 | https://alfredang.github.io/cybersecuritysimulator/ |
+
+---
+
 ## Section A — Tools installed inside the Killercoda Ubuntu VM
 
 ### A1. Container & virtualization

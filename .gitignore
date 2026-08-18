@@ -10,3 +10,9 @@
 # WSQ assessment materials (confidential — never pushed)
 /assessment/
 /assessment\ /
+
+# Third-party reference material (copyrighted — never pushed)
+/reference/
+
+# LibreOffice lock files
+.~lock.*#
