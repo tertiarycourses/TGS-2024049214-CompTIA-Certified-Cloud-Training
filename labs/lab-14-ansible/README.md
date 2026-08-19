@@ -2,7 +2,10 @@
 
 In this lab you will write a small Ansible playbook that installs and configures Nginx idempotently. Configuration as Code (CaC) is one of the CV0-004 deployment sub-objectives.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -18,6 +21,8 @@ ansible --version
 
 ## Step 2 — Inventory (just localhost)
 
+> Ready-made file: [`inventory.ini`](inventory.ini) — you can download it instead of typing this block.
+
 ```bash
 mkdir -p /tmp/ans && cd /tmp/ans
 cat > inventory.ini <<'EOF'
@@ -29,6 +34,8 @@ EOF
 ---
 
 ## Step 3 — Write a playbook (YAML)
+
+> Ready-made file: [`site.yml`](site.yml) — you can download it instead of typing this block.
 
 ```bash
 cat > site.yml <<'EOF'
@@ -97,6 +104,8 @@ Ansible re-applies the desired state.
 
 ## Step 7 — Variables and conditionals
 
+> Ready-made file: [`extra.yml`](extra.yml) — you can download it instead of typing this block.
+
 ```bash
 cat > extra.yml <<'EOF'
 ---
@@ -161,3 +170,13 @@ ls /tmp/ans/roles/myweb
 - Ansible — https://www.ansible.com
 - Ansible Galaxy — https://galaxy.ansible.com
 - YAML Lint (web) — https://www.yamllint.com
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`inventory.ini`](inventory.ini) | Step 2 Ansible inventory — a single local `web` host. |
+| [`site.yml`](site.yml) | Step 3 playbook — installs nginx, deploys the index page, ensures the service is running. |
+| [`extra.yml`](extra.yml) | Step 7 playbook — variables and a `when:` conditional for optional certbot. |

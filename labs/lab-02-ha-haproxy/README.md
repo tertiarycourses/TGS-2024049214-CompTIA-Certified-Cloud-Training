@@ -2,7 +2,10 @@
 
 In this lab you will simulate a multi-AZ load-balanced deployment by running two backend web servers and an HAProxy load balancer in front of them. You will then add a second HAProxy instance with **Keepalived** so a virtual IP fails over when the primary load balancer dies — the same pattern used by every cloud provider's regional load balancer.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -34,6 +37,8 @@ curl http://localhost:8082
 ---
 
 ## Step 3 — Configure HAProxy with health checks
+
+> Ready-made file: [`haproxy.cfg`](haproxy.cfg) — you can download it instead of typing this block.
 
 ```bash
 cat > /etc/haproxy/haproxy.cfg <<'EOF'
@@ -91,6 +96,8 @@ docker start az1
 
 ## Step 6 — Add Keepalived for VRRP failover
 
+> Ready-made file: [`keepalived.conf`](keepalived.conf) — you can download it instead of typing this block.
+
 ```bash
 cat > /etc/keepalived/keepalived.conf <<'EOF'
 vrrp_instance VI_1 {
@@ -145,3 +152,12 @@ ip -brief addr show eth0 | grep 10.0.0.250
 - HAProxy — https://www.haproxy.org
 - Keepalived — https://www.keepalived.org
 - Docker — https://www.docker.com
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`haproxy.cfg`](haproxy.cfg) | Step 3 HAProxy config — round-robin across the two simulated AZ backends with health checks. |
+| [`keepalived.conf`](keepalived.conf) | Step 6 Keepalived VRRP config — floats the virtual IP 10.0.0.250. |

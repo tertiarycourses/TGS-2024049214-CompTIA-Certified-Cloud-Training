@@ -2,7 +2,10 @@
 
 In this lab you will use **restic** — a free, open-source, encrypted, deduplicating backup tool — to perform **full**, **incremental**, and **differential**-style snapshots, store them off-site (MinIO/S3), test recoverability, and verify integrity.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

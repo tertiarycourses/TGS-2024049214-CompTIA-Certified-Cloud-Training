@@ -2,7 +2,10 @@
 
 In this lab you will compare IaaS, PaaS, SaaS, and FaaS by running the equivalent of each model **locally** on the Killercoda Ubuntu Playground. You will provision a raw VM-style workload (IaaS), deploy a managed Postgres-like service (PaaS), use a SaaS-style web app, and run a Function-as-a-Service handler. By the end you will be able to explain who is responsible for what under the **shared responsibility model**.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -65,6 +68,8 @@ You did not write code, manage runtime, or touch the database. Under SaaS the **
 
 Install OpenFaaS-style local handler with a Python script that runs on demand — like AWS Lambda.
 
+> Ready-made file: [`handler.py`](handler.py) — you can download it instead of typing this block.
+
 ```bash
 mkdir -p /tmp/faas && cat > /tmp/faas/handler.py <<'EOF'
 import sys, json
@@ -126,3 +131,11 @@ echo '{"name":"Cloud+"}' | python3 /tmp/faas/handler.py
 - Docker — https://www.docker.com
 - Killercoda Ubuntu Playground — https://killercoda.com/playgrounds/scenario/ubuntu
 - AWS Shared Responsibility Model (reading) — https://aws.amazon.com/compliance/shared-responsibility-model/
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`handler.py`](handler.py) | Step 5 FaaS handler — reads a JSON event on stdin and returns a greeting. |

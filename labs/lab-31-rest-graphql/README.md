@@ -2,7 +2,10 @@
 
 In this lab you will call a public **REST** API, host a local **GraphQL** server, and try a **WebSocket** stream — covering the exam's web-services and integration sub-objectives.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -42,6 +45,8 @@ REST = stateless verbs over HTTP, one resource per URL.
 ---
 
 ## Step 3 — Host a local GraphQL endpoint
+
+> Ready-made file: [`server.mjs`](server.mjs) — you can download it instead of typing this block.
 
 ```bash
 docker run -d --name gql -p 4000:4000 \
@@ -149,3 +154,11 @@ docker ps --filter name=gql --filter name=echo --filter name=redis --format '{{.
 - websocat — https://github.com/vi/websocat
 - Postman free tier — https://www.postman.com
 - Hoppscotch (open-source) — https://hoppscotch.io
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`server.mjs`](server.mjs) | Step 3 GraphQL Yoga server exposing the `hello(name)` query. |

@@ -2,7 +2,10 @@
 
 In this lab you will gradually shift traffic from v1 to v2 using HAProxy server weights — 90/10, then 50/50, then 100% — exactly the strategy used by AWS ALB weighted target groups, Istio canaries, and Argo Rollouts.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -28,6 +31,8 @@ docker exec v2 sh -c 'echo v2 > /usr/share/nginx/html/index.html'
 ---
 
 ## Step 3 — HAProxy at 90/10 (canary 10%)
+
+> Ready-made file: [`haproxy-canary-90-10.cfg`](haproxy-canary-90-10.cfg) — you can download it instead of typing this block.
 
 ```bash
 cat > /etc/haproxy/haproxy.cfg <<'EOF'
@@ -71,6 +76,8 @@ for i in $(seq 1 50); do curl -s http://localhost/; done | sort | uniq -c
 ---
 
 ## Step 5 — Promote v2 to 100%
+
+> Ready-made file: [`haproxy-promote-v2.cfg`](haproxy-promote-v2.cfg) — you can download it instead of typing this block.
 
 ```bash
 sed -i 's/weight 50/weight 0/; 0,/weight 0/!s/weight 0/weight 100/' /etc/haproxy/haproxy.cfg
@@ -143,3 +150,12 @@ for i in $(seq 1 20); do curl -s http://localhost/; done | sort | uniq -c
 ## Free tools used
 - HAProxy — https://www.haproxy.org
 - Docker — https://www.docker.com
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`haproxy-canary-90-10.cfg`](haproxy-canary-90-10.cfg) | Step 3 HAProxy config — 90/10 weighted split between v1 and the v2 canary. |
+| [`haproxy-promote-v2.cfg`](haproxy-promote-v2.cfg) | Step 5 HAProxy config — v2 promoted to 100%, v1 kept as backup. |

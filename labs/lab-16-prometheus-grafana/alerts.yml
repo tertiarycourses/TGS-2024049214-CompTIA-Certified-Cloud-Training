@@ -1,0 +1,8 @@
+groups:
+- name: cpu
+  rules:
+  - alert: HighCPU
+    expr: 1 - avg(rate(node_cpu_seconds_total{mode="idle"}[1m])) > 0.5
+    for: 30s
+    labels: { severity: warning }
+    annotations: { summary: "CPU > 50%" }

@@ -2,7 +2,10 @@
 
 In this lab you will build a CI/CD pipeline locally with **act** — a free tool that runs GitHub Actions workflows in Docker. The workflow tests, builds, scans, and "deploys" an artifact.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -20,6 +23,8 @@ act --version
 ---
 
 ## Step 2 — Sample repository with a Python app
+
+> Ready-made files: [`app.py`](app.py), [`test_app.py`](test_app.py) and [`Dockerfile`](Dockerfile) — you can download them instead of typing this block.
 
 ```bash
 mkdir -p /tmp/cicd && cd /tmp/cicd
@@ -45,6 +50,8 @@ EOF
 ---
 
 ## Step 3 — Define the workflow (.github/workflows/ci.yml)
+
+> Ready-made file: [`ci.yml`](ci.yml) — you can download it instead of typing this block.
 
 ```bash
 mkdir -p .github/workflows
@@ -183,3 +190,14 @@ git -C /tmp/cicd log --oneline
 - GitLab CI — https://docs.gitlab.com/ee/ci
 - Jenkins — https://www.jenkins.io
 - Drone — https://www.drone.io
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`app.py`](app.py) | Step 2 application code under test. |
+| [`test_app.py`](test_app.py) | Step 2 pytest unit test run by the `test` job. |
+| [`Dockerfile`](Dockerfile) | Step 2 packaging definition built by the `build` job. |
+| [`ci.yml`](ci.yml) | Step 3 GitHub Actions workflow (test → build → scan → deploy); copy to `.github/workflows/ci.yml`. |

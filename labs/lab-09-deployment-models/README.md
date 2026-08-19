@@ -2,7 +2,10 @@
 
 In this lab you will simulate a **private** cloud (your Killercoda VM), a **public** cloud (LocalStack — a free local AWS), and connect them as a **hybrid** with a WireGuard tunnel. By the end you will see why each model trades cost, control, and elasticity differently.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

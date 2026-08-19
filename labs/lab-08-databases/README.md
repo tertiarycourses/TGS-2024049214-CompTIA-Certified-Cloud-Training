@@ -2,7 +2,10 @@
 
 In this lab you will run a **self-managed** Postgres (relational) and a **provider-managed-style** MongoDB (non-relational), compare schemas and queries, and discuss when to choose each.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

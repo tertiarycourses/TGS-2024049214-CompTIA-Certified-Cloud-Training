@@ -2,8 +2,14 @@
 
 In this lab you will deploy three replicas of an app behind a load balancer, then upgrade them **one at a time** while traffic continues — the rolling deployment strategy used by Kubernetes Deployments, ECS services, and ASGs with rolling updates.
 
-Run all commands on the Killercoda Ubuntu Playground:
-https://killercoda.com/playgrounds/scenario/ubuntu
+## Lab platform
+
+Run this lab either way:
+
+- **Killercoda Ubuntu Playground** (nothing to install) — https://killercoda.com/playgrounds/scenario/ubuntu
+- **Docker Desktop** on your own machine — https://www.docker.com/products/docker-desktop/
+
+> On Docker Desktop drop the `apt install docker.io` and `systemctl start docker` steps — the engine is already running. Everything else is identical.
 
 ---
 
@@ -17,6 +23,8 @@ systemctl start docker
 ---
 
 ## Step 2 — Define the stack
+
+> Ready-made files: [`docker-compose.yml`](docker-compose.yml) and [`haproxy.cfg`](haproxy.cfg) — you can download them instead of typing this block.
 
 ```bash
 mkdir -p /tmp/rolling && cd /tmp/rolling
@@ -133,3 +141,12 @@ docker compose logs lb --tail 5
 ## Free tools used
 - Docker Compose — https://docs.docker.com/compose
 - HAProxy — https://www.haproxy.org
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`docker-compose.yml`](docker-compose.yml) | Step 2 Compose stack — 3 app replicas behind an HAProxy load balancer. |
+| [`haproxy.cfg`](haproxy.cfg) | Step 2 HAProxy config — server-template with Docker DNS resolvers for the replicas. |

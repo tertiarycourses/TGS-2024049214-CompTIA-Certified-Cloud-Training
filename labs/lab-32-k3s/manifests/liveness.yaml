@@ -1,0 +1,32 @@
+# Lab 32 — Step 6: Liveness probe (self-healing)
+# Declarative equivalent of the `kubectl patch deploy/web` in Step 6:
+# the same `web` Deployment with the livenessProbe already in place.
+# If a pod stops answering GET / on port 80, the kubelet restarts it.
+# Apply this instead of the patch, or after it to keep the two in sync.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.26-alpine
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 5

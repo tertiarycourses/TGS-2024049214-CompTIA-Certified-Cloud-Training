@@ -2,7 +2,10 @@
 
 In this lab you will exercise every CV0-004 source-control verb: **commit, push, branch, merge, pull request review** — using a local Gitea server as your "GitHub clone".
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -34,6 +37,8 @@ curl -s -u admin:cloudplus -X POST http://localhost:3000/api/v1/user/repos \
 
 ## Step 3 — Clone, commit, push
 
+> Ready-made file: [`main.tf`](main.tf) — you can download it instead of typing this block.
+
 ```bash
 mkdir -p /tmp/work && cd /tmp/work
 git clone http://admin:cloudplus@localhost:3000/admin/infra.git
@@ -52,6 +57,8 @@ git push origin main
 ---
 
 ## Step 4 — Branch management
+
+> Ready-made file: [`encryption.tf.snippet`](encryption.tf.snippet) — you can download it instead of typing this block.
 
 ```bash
 git checkout -b feature/encryption
@@ -163,3 +170,12 @@ grep -c '<<<<<<<' main.tf
 - GitHub (free public repos) — https://github.com
 - GitLab Community — https://about.gitlab.com
 - Pro Git book (free) — https://git-scm.com/book
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`main.tf`](main.tf) | Step 3 initial Terraform file committed to the Gitea repo. |
+| [`encryption.tf.snippet`](encryption.tf.snippet) | Step 4 block appended to `main.tf` on the `feature/encryption` branch. |

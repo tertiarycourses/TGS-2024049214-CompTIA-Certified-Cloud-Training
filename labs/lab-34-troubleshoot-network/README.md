@@ -2,7 +2,10 @@
 
 In this lab you will reproduce and resolve the network failures from CV0-004 6.2: **DHCP, DNS, NTP, NAT, HTTP status codes, latency, routing, switching, IP overlap, scope exhaustion**.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

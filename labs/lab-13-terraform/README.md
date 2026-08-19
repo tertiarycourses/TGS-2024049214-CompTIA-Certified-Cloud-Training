@@ -2,7 +2,10 @@
 
 In this lab you will write a Terraform configuration that provisions an S3 bucket and a security policy on **LocalStack** (free local AWS). You will see plan/apply, state, drift detection, and versioning.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -24,6 +27,8 @@ sleep 8
 ---
 
 ## Step 2 — Write the Terraform configuration
+
+> Ready-made file: [`main.tf`](main.tf) — you can download it instead of typing this block.
 
 ```bash
 mkdir -p /tmp/tf && cd /tmp/tf
@@ -153,3 +158,11 @@ git -C /tmp/tf log --oneline
 - Terraform — https://developer.hashicorp.com/terraform
 - LocalStack Community — https://www.localstack.cloud
 - OpenTofu (Terraform fork) — https://opentofu.org
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`main.tf`](main.tf) | Step 2 Terraform config — LocalStack AWS provider plus the parameterised S3 bucket. |

@@ -2,7 +2,10 @@
 
 In this lab you will configure SSH key-based authentication, add **Google Authenticator TOTP** as a second factor, and route through a **bastion** (jump host) — the canonical secure-access pattern for cloud VMs.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

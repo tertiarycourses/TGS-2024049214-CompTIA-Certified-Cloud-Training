@@ -2,7 +2,10 @@
 
 In this lab you will run **Trivy** against a container image, the local filesystem, and an IaC config. You will follow the exam's vulnerability-management steps: **scope → identify → assess → remediate**.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -80,6 +83,8 @@ trivy fs --security-checks vuln,secret /etc | head -30
 
 ## Step 7 — IaC scan (misconfiguration)
 
+> Ready-made file: [`main.tf`](main.tf) — you can download it instead of typing this block.
+
 ```bash
 mkdir -p /tmp/tf-bad && cat > /tmp/tf-bad/main.tf <<'EOF'
 resource "aws_s3_bucket" "bad" { bucket = "world-readable" }
@@ -132,3 +137,11 @@ trivy fs --security-checks vuln,secret /etc | head -20
 - OpenVAS / Greenbone CE — https://www.greenbone.net
 - NVD CVE database — https://nvd.nist.gov
 - CVE.org — https://www.cve.org
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`main.tf`](main.tf) | Step 7 deliberately insecure Terraform — the public-read S3 bucket Trivy flags. |

@@ -2,7 +2,10 @@
 
 In this lab you will simulate triggered, scheduled, and manual scaling of a service with Docker Compose plus a Bash controller that watches CPU and adds/removes replicas — the same pattern every cloud auto-scaler uses.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -17,6 +20,8 @@ systemctl start docker
 ---
 
 ## Step 2 — Define a scalable service
+
+> Ready-made file: [`docker-compose.yml`](docker-compose.yml) — you can download it instead of typing this block.
 
 ```bash
 mkdir -p /tmp/scale && cd /tmp/scale
@@ -35,6 +40,8 @@ docker compose ps
 ## Step 3 — Triggered scaling (load-based)
 
 This loop reads host CPU every 5 s and scales between 2 and 6 replicas.
+
+> Ready-made file: [`autoscale.sh`](autoscale.sh) — you can download it instead of typing this block.
 
 ```bash
 cat > /tmp/scale/autoscale.sh <<'EOF'
@@ -135,3 +142,12 @@ docker stats --no-stream --format '{{.Name}}\t{{.CPUPerc}}'
 - Docker Compose — https://docs.docker.com/compose
 - stress-ng — https://github.com/ColinIanKing/stress-ng
 - cron (built-in)
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`docker-compose.yml`](docker-compose.yml) | Step 2 Compose stack — the scalable `app` service. |
+| [`autoscale.sh`](autoscale.sh) | Step 3 auto-scaling control loop — watches host CPU and scales between 2 and 6 replicas. |

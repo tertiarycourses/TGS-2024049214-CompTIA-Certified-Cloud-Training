@@ -2,7 +2,10 @@
 
 In this lab you will reproduce and fix the security failures from CV0-004 6.3: **deprecated cipher suites, privilege escalation, unauthorized access, leaked credentials, software vulnerabilities, unauthorized software**.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 > **Web tool:** Rehearse the attack/defence scenarios in this lab with the free browser **Cybersecurity Simulator** — https://alfredang.github.io/cybersecuritysimulator/.
@@ -85,6 +88,8 @@ fail2ban-client status sshd 2>/dev/null
 
 ## Step 6 — Leaked credentials in source control
 
+> Ready-made file: [`config.py`](config.py) — you can download it instead of typing this block.
+
 ```bash
 mkdir -p /tmp/leak && cd /tmp/leak && git init -q
 cat > config.py <<'EOF'
@@ -165,3 +170,11 @@ docker run --rm -v /tmp/leak:/repo zricethezav/gitleaks:latest detect -s /repo -
 - TruffleHog — https://github.com/trufflesecurity/trufflehog
 - fail2ban — https://www.fail2ban.org
 - auditd (built-in)
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`config.py`](config.py) | Step 6 file with dummy AWS example credentials that gitleaks detects. |

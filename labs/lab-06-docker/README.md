@@ -2,8 +2,14 @@
 
 In this lab you will build a custom image, run a stand-alone container, expose ports, mount persistent and ephemeral storage, and push to a local registry. By the end you will have practised every CV0-004 containerization sub-objective.
 
-Run all commands on the Killercoda Ubuntu Playground:
-https://killercoda.com/playgrounds/scenario/ubuntu
+## Lab platform
+
+Run this lab either way:
+
+- **Killercoda Ubuntu Playground** (nothing to install) — https://killercoda.com/playgrounds/scenario/ubuntu
+- **Docker Desktop** on your own machine — https://www.docker.com/products/docker-desktop/
+
+> On Docker Desktop drop the `apt install docker.io` and `systemctl start docker` steps — the engine is already running. Everything else is identical.
 
 ---
 
@@ -18,6 +24,8 @@ docker --version
 ---
 
 ## Step 2 — Build a custom image
+
+> Ready-made files: [`index.html`](index.html) and [`Dockerfile`](Dockerfile) — you can download them instead of typing this block.
 
 ```bash
 mkdir -p /tmp/app && cd /tmp/app
@@ -103,6 +111,8 @@ curl -s http://localhost:5000/v2/_catalog
 
 ## Step 8 — Workload orchestration preview (Compose)
 
+> Ready-made file: [`docker-compose.yml`](docker-compose.yml) — you can download it instead of typing this block.
+
 ```bash
 apt install -y docker-compose-v2 || apt install -y docker-compose
 cat > /tmp/docker-compose.yml <<'EOF'
@@ -156,3 +166,13 @@ docker compose -f /tmp/docker-compose.yml ps
 - Docker Engine — https://www.docker.com
 - Docker Hub — https://hub.docker.com
 - Distribution registry — https://github.com/distribution/distribution
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`index.html`](index.html) | Step 2 page baked into the custom `myapp:1.0` image. |
+| [`Dockerfile`](Dockerfile) | Step 2 image definition — nginx:alpine plus the custom index page. |
+| [`docker-compose.yml`](docker-compose.yml) | Step 8 Compose stack — web + redis cache orchestration preview. |

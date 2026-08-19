@@ -2,7 +2,10 @@
 
 In this lab you will run **HashiCorp Vault** in dev mode, store secrets, generate dynamic database credentials, and rotate them — the secrets-management sub-objective of CV0-004.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

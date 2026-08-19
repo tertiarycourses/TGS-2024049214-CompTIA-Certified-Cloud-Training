@@ -1,0 +1,23 @@
+---
+- name: Configure web server
+  hosts: web
+  become: true
+  vars:
+    site_msg: "Configured by Ansible"
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: true
+
+    - name: Deploy index page
+      copy:
+        dest: /var/www/html/index.nginx-debian.html
+        content: "<h1>{{ site_msg }}</h1>"
+
+    - name: Ensure nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: true

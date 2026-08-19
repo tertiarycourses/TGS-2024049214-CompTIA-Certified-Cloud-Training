@@ -2,7 +2,10 @@
 
 In this lab you will scrape a node's metrics with **Prometheus**, visualise them in **Grafana**, and trigger an **alert** when CPU rises — covering the exam's logging/monitoring/alerting/triage sub-objectives.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -23,11 +26,15 @@ docker run -d --name node --net=host \
   prom/node-exporter:latest
 sleep 2
 curl -s http://localhost:9100/metrics | head -5
+> Ready-made file: [`prom.yml`](prom.yml) — you can download it instead of typing this block.
+
 ```
 
 ---
 
 ## Step 3 — Configure and run Prometheus
+
+> Ready-made file: [`alerts.yml`](alerts.yml) — you can download it instead of typing this block.
 
 ```bash
 mkdir -p /tmp/prom && cat > /tmp/prom/prom.yml <<'EOF'
@@ -140,3 +147,12 @@ curl -s 'http://localhost:9090/api/v1/alerts' | jq '.data.alerts[].state'
 - Grafana OSS — https://grafana.com/oss/grafana
 - node-exporter — https://github.com/prometheus/node_exporter
 - stress-ng — https://github.com/ColinIanKing/stress-ng
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`prom.yml`](prom.yml) | Step 3 Prometheus config — scrapes node-exporter every 5s and loads the alert rules. |
+| [`alerts.yml`](alerts.yml) | Step 3 alert rules — the `HighCPU` rule that fires above 50% CPU. |

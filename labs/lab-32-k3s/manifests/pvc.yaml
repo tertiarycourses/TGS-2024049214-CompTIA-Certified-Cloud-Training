@@ -1,0 +1,14 @@
+# Lab 32 — Step 5: Persistent volume
+# The `data` PersistentVolumeClaim. On k3s and on the Killercoda Kubernetes
+# playground this is satisfied by the default dynamic provisioner
+# (local-path on k3s) — the equivalent of AWS EBS / Azure Disk.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi

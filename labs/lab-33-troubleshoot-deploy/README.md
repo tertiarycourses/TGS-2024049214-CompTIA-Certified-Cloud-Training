@@ -2,7 +2,10 @@
 
 In this lab you will reproduce and fix the deployment problems listed in CV0-004 6.1: **resource allocation, permissions, oversubscription, sizing, outdated definitions, deprecation, quotas, regional availability**.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

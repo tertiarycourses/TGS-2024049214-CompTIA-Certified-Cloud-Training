@@ -2,7 +2,10 @@
 
 In this lab you will build a virtual private cloud (VPC) entirely with Linux network namespaces. You will create two subnets, a router, NAT to the internet, and a security group rule — exactly the building blocks AWS, Azure and GCP expose as managed services.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

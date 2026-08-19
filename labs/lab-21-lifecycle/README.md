@@ -2,7 +2,10 @@
 
 In this lab you will simulate the lifecycle of a cloud resource: **provision → patch (minor) → upgrade (major) → test → decommission**. You will use `apt`, `unattended-upgrades`, container image tags, and clean teardown.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

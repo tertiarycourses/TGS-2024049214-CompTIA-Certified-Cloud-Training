@@ -2,7 +2,10 @@
 
 In this lab you will audit the Killercoda VM against the **CIS Ubuntu Benchmark** using **Lynis**, score it, and remediate one finding — covering the exam's *benchmark, hardening, patching* sub-objectives.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -55,6 +58,8 @@ ls -l /etc/shadow /etc/passwd
 ---
 
 ## Step 5 — Remediate a kernel hardening finding
+
+> Ready-made file: [`99-hardening.conf`](99-hardening.conf) — you can download it instead of typing this block.
 
 ```bash
 cat > /etc/sysctl.d/99-hardening.conf <<'EOF'
@@ -135,3 +140,11 @@ sysctl net.ipv4.tcp_syncookies kernel.randomize_va_space net.ipv4.conf.all.send_
 - Prowler — https://github.com/prowler-cloud/prowler
 - kube-bench — https://github.com/aquasecurity/kube-bench
 - Docker Bench Security — https://github.com/docker/docker-bench-security
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`99-hardening.conf`](99-hardening.conf) | Step 5 sysctl hardening file that raises the Lynis hardening index. |

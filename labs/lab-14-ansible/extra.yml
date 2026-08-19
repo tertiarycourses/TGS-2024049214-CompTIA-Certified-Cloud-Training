@@ -1,0 +1,11 @@
+---
+- hosts: web
+  become: true
+  vars:
+    enable_https: false
+  tasks:
+    - name: Install certbot only if HTTPS requested
+      apt:
+        name: certbot
+        state: present
+      when: enable_https

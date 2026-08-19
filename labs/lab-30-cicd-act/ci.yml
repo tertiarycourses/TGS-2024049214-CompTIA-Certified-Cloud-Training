@@ -1,0 +1,32 @@
+name: ci
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install
+        run: pip install pytest
+      - name: unit tests
+        run: pytest -q
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: build image
+        run: docker build -t myapp:${{ github.sha }} .
+  scan:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: trivy fs
+        run: |
+          curl -sSL https://aquasecurity.github.io/trivy/install.sh | sh -s -- -b /usr/local/bin
+          trivy fs --severity CRITICAL --exit-code 0 .
+  deploy:
+    needs: scan
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying $GITHUB_SHA to staging"

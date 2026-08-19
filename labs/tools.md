@@ -7,7 +7,22 @@ Two categories:
 1. **Inside Killercoda** — installed in the disposable Ubuntu VM via `apt` or pulled as a Docker image. Nothing touches your own machine.
 2. **External / Standalone** — downloaded onto your own PC/laptop, or used in a browser. Useful when you're offline, on a school PC, or want a GUI.
 
-Killercoda playground (free, no signup): https://killercoda.com/playgrounds/scenario/ubuntu
+## Lab platforms — where each lab runs
+
+Every lab names its platform in a **Lab platform** section at the top. There are three:
+
+| Platform | Use it for | Link |
+|----------|-----------|------|
+| **Killercoda Ubuntu Playground** | The Linux labs — a disposable root Ubuntu VM in the browser. Default for most labs. | https://killercoda.com/playgrounds/scenario/ubuntu |
+| **Killercoda Kubernetes Playground** | The Kubernetes labs — a real cluster with `kubectl` ready. The Ubuntu playground has no cluster. | https://killercoda.com/playgrounds/scenario/kubernetes |
+| **Docker Desktop** | The container labs, run locally on Windows, macOS or Linux. Optional. | https://www.docker.com/products/docker-desktop/ |
+
+- **Kubernetes playground:** Lab 32
+- **Docker Desktop (or the Ubuntu playground):** Labs 6, 12, 36
+- **Ubuntu playground:** the remaining 32 labs
+
+> On Docker Desktop the engine is already running — skip any `apt install docker.io` and
+> `systemctl start docker` step. Everything else in the lab is identical.
 
 ---
 

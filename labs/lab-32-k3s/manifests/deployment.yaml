@@ -1,0 +1,24 @@
+# Lab 32 — Step 2: Deploy an application
+# The `web` Deployment: 3 replicas of nginx:1.26-alpine listening on port 80.
+# Step 3 scales this to 5 replicas; Step 4 rolls it forward to nginx:1.27-alpine.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.26-alpine
+          ports:
+            - containerPort: 80

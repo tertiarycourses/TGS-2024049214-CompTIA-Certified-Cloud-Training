@@ -1,0 +1,15 @@
+services:
+  app:
+    image: nginx:alpine
+    deploy:
+      replicas: 3
+    networks: [back]
+    command: >
+      sh -c 'echo "v1 from $$HOSTNAME" > /usr/share/nginx/html/index.html && nginx -g "daemon off;"'
+  lb:
+    image: haproxy:alpine
+    ports: ["80:80"]
+    volumes: ["./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"]
+    networks: [back]
+networks:
+  back:

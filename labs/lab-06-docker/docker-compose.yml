@@ -1,0 +1,6 @@
+services:
+  web:
+    image: myapp:1.0
+    ports: ["8081:80"]
+  cache:
+    image: redis:7-alpine

@@ -2,8 +2,14 @@
 
 In this final lab you will combine the methods from Labs 33-35 to triage real container failures: **CrashLoopBackOff**, **OOMKilled**, image pull failures, hostname/DNS resolution inside containers, and read-only filesystem errors.
 
-Run all commands on the Killercoda Ubuntu Playground:
-https://killercoda.com/playgrounds/scenario/ubuntu
+## Lab platform
+
+Run this lab either way:
+
+- **Killercoda Ubuntu Playground** (nothing to install) — https://killercoda.com/playgrounds/scenario/ubuntu
+- **Docker Desktop** on your own machine — https://www.docker.com/products/docker-desktop/
+
+> On Docker Desktop drop the `apt install docker.io` and `systemctl start docker` steps — the engine is already running. Everything else is identical.
 
 ---
 
@@ -100,6 +106,8 @@ K8s analogue: `kubectl describe pod` → `FailedScheduling: 0/1 nodes available:
 
 ## Step 8 — End-to-end triage script
 
+> Ready-made file: [`triage.sh`](triage.sh) — you can download it instead of typing this block.
+
 ```bash
 cat > /tmp/triage.sh <<'EOF'
 #!/bin/bash
@@ -169,3 +177,11 @@ docker run --rm --dns 1.1.1.1 alpine nslookup example.com | tail -3
 - kubectl + k9s — https://k9scli.io
 - ctop (container top) — https://github.com/bcicen/ctop
 - lazydocker — https://github.com/jesseduffield/lazydocker
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`triage.sh`](triage.sh) | Step 8 end-to-end container triage script (state, logs, stats, mounts, network). |

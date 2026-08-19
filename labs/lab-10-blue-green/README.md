@@ -2,7 +2,10 @@
 
 In this lab you will run two versions of an application — the live "blue" v1 and the staged "green" v2 — and switch traffic instantly by reloading Nginx. This is the canonical zero-downtime deployment pattern.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -30,6 +33,8 @@ docker exec green sh -c 'echo "v2 GREEN" > /usr/share/nginx/html/index.html'
 ---
 
 ## Step 3 — Point Nginx at Blue
+
+> Ready-made file: [`nginx-blue-green.conf`](nginx-blue-green.conf) — you can download it instead of typing this block.
 
 ```bash
 cat > /etc/nginx/sites-available/default <<'EOF'
@@ -114,3 +119,11 @@ curl -s http://localhost/
 ## Free tools used
 - Nginx — https://nginx.org
 - Docker — https://www.docker.com
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`nginx-blue-green.conf`](nginx-blue-green.conf) | Step 3 Nginx site config — the `live` upstream that is flipped between blue (8081) and green (8082). |

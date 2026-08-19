@@ -2,7 +2,10 @@
 
 In this lab you will run **Falco** — a CNCF runtime security tool — and trigger detections for shell-in-container, sensitive-file reads, unexpected outbound connections, and cryptojacking-style behaviour.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 > **Web tool:** Explore how these attacks look from the defender's side with the free browser **Cybersecurity Simulator** — https://alfredang.github.io/cybersecuritysimulator/.

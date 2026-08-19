@@ -1,0 +1,27 @@
+# Lab 32 — Step 7: RBAC (Lab 24 idea, K8s-native)
+# Declarative equivalent of:
+#   kubectl create role pod-reader --verb=get,list --resource=pods
+#   kubectl create rolebinding alice-pods --role=pod-reader --user=alice
+# After applying, `kubectl auth can-i list pods --as alice` answers yes
+# while `kubectl auth can-i delete pods --as alice` answers no.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-reader
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: alice-pods
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: pod-reader
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: alice

@@ -2,7 +2,10 @@
 
 In this lab you will read and write JSON and YAML, parse with `jq` and `yq`, and exercise the scripting-logic primitives the exam lists: variables, conditionals, operators, data types, functions.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -17,6 +20,8 @@ pip3 install yq
 ---
 
 ## Step 2 — Write JSON
+
+> Ready-made file: [`server.json`](server.json) — you can download it instead of typing this block.
 
 ```bash
 mkdir -p /tmp/data && cd /tmp/data
@@ -40,6 +45,8 @@ Data types in play: string, number, boolean, array, object.
 ---
 
 ## Step 3 — Same data in YAML
+
+> Ready-made file: [`server.yaml`](server.yaml) — you can download it instead of typing this block.
 
 ```bash
 cat > server.yaml <<'EOF'
@@ -144,3 +151,12 @@ jq 'if .ram_gb < 8 then "undersized" else "ok" end' server.json
 - yq — https://kislyuk.github.io/yq
 - JSONLint — https://jsonlint.com
 - YAML Lint — https://www.yamllint.com
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`server.json`](server.json) | Step 2 JSON sample exercising string, number, boolean, array and object types. |
+| [`server.yaml`](server.yaml) | Step 3 YAML sample — the same data in the human-friendly format. |

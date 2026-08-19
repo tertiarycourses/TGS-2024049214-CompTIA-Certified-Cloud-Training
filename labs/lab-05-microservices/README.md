@@ -2,7 +2,10 @@
 
 In this lab you will deploy three loosely-coupled microservices behind Consul for service discovery. You will see how containers register themselves, how a client resolves a service by name (not IP), and how the fan-out pattern works when one service calls many.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

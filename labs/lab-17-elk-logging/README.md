@@ -4,7 +4,10 @@ In this lab you will run **Elasticsearch**, **Logstash**, and **Kibana** (ELK) o
 
 > ELK images are heavy (~1.5 GB). On Killercoda, expect a slower pull. If memory runs tight, swap to the lighter **OpenSearch** alternative shown at the end.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 > **Web tool:** Build and test the grok/regex patterns for Logstash with the free browser **Regex Generator** — https://alfredang.github.io/regexgenerator/ — before you put them in the pipeline config.
@@ -50,6 +53,8 @@ Open `http://<killercoda-host>:5601` from the playground's Traffic tab.
 ---
 
 ## Step 4 — Run Logstash with a syslog input
+
+> Ready-made file: [`pipeline.conf`](pipeline.conf) — you can download it instead of typing this block.
 
 ```bash
 mkdir -p /tmp/ls && cat > /tmp/ls/pipeline.conf <<'EOF'
@@ -157,3 +162,11 @@ curl -s http://localhost:9200/_ilm/policy/logs-retention | jq '.["logs-retention
 - Elasticsearch / Kibana / Logstash — https://www.elastic.co/elastic-stack
 - OpenSearch — https://opensearch.org
 - rsyslog — https://www.rsyslog.com
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`pipeline.conf`](pipeline.conf) | Step 4 Logstash pipeline — TCP syslog input, mutate filter, Elasticsearch output. |

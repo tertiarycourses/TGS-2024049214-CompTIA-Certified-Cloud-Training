@@ -2,7 +2,10 @@
 
 In this lab you will run Jaeger all-in-one, instrument a small Python script with OpenTelemetry, and view a distributed trace in the Jaeger UI — covering the exam's tracing sub-objective.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
@@ -31,6 +34,8 @@ UI: `http://<killercoda-host>:16686`.
 ---
 
 ## Step 3 — Instrument a "checkout" microservice path
+
+> Ready-made file: [`app.py`](app.py) — you can download it instead of typing this block.
 
 ```bash
 mkdir -p /tmp/trace && cd /tmp/trace
@@ -126,3 +131,11 @@ curl -s "http://localhost:16686/api/traces?service=shop&limit=1" | jq '[.data[0]
 - Jaeger — https://www.jaegertracing.io
 - OpenTelemetry — https://opentelemetry.io
 - Zipkin (alternative) — https://zipkin.io
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`app.py`](app.py) | Step 3 OpenTelemetry-instrumented checkout script that emits parent and child spans to Jaeger. |

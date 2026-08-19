@@ -2,7 +2,10 @@
 
 In this lab you will create a virtual machine with QEMU, examine virtualization concepts (clone, host affinity, hardware pass-through, VM networks), and compare it to the container model from Lab 6.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 > Note: Killercoda runs nested under KVM, so we use **QEMU TCG** (software emulation) instead of full KVM acceleration. The concepts and commands are identical to a real hypervisor.

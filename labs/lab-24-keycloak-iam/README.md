@@ -2,7 +2,10 @@
 
 In this lab you will run **Keycloak** (open-source identity provider), create a realm, users, roles, and an OAuth 2.0 client — the building blocks of cloud IAM (federation, SAML, OIDC, RBAC).
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---

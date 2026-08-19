@@ -1,0 +1,7 @@
+name: web-1
+cpu: 2
+ram_gb: 4
+tags:
+  - web
+  - prod
+active: true

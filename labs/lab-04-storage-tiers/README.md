@@ -2,7 +2,10 @@
 
 In this lab you will create one of each cloud storage type on the Killercoda VM: a **block** device with a loopback file, an **object** store with MinIO (S3-compatible), and a **file** share with NFS. You will then measure IOPS with `fio` to see why hot/warm/cold tiering exists.
 
-Run all commands on the Killercoda Ubuntu Playground:
+## Lab platform
+
+Run all commands on the **Killercoda Ubuntu Playground**:
+
 https://killercoda.com/playgrounds/scenario/ubuntu
 
 ---
