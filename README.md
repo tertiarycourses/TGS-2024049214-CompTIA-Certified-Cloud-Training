@@ -23,7 +23,7 @@
 
 This WSQ course takes you from cloud fundamentals to running production-grade cloud systems, and prepares you for the **CompTIA Cloud+ (CV0-004)** certification exam. You will build every concept yourself — virtual networks, containers, Kubernetes, Infrastructure as Code, observability stacks, IAM, WAFs and CI/CD pipelines — then break them and fix them.
 
-It is designed for systems administrators, cloud engineers, DevOps practitioners and IT professionals with roughly 2–3 years of experience who want a vendor-neutral cloud credential. Every one of the **36 labs** runs free in the browser on the [Killercoda Ubuntu Playground](https://killercoda.com/playgrounds/scenario/ubuntu) — no cloud account, no install, no credit card.
+It is designed for systems administrators, cloud engineers, DevOps practitioners and IT professionals with roughly 2–3 years of experience who want a vendor-neutral cloud credential. Every one of the **36 labs** runs free — no cloud account and no credit card required. Each lab names the platform it runs on: the [Killercoda Ubuntu Playground](https://killercoda.com/playgrounds/scenario/ubuntu) for the Linux labs, the [Killercoda Kubernetes Playground](https://killercoda.com/playgrounds/scenario/kubernetes) for the Kubernetes labs, and optionally [Docker Desktop](https://www.docker.com/products/docker-desktop/) for the container labs.
 
 ---
 
@@ -126,11 +126,23 @@ Methodically diagnosing and fixing deployment, network, security and container /
 
 ## Tools
 
+### Lab platforms
+
+Each lab states its platform in a **Lab platform** section at the top.
+
+| Platform | Use it for | Labs |
+|----------|-----------|------|
+| [Killercoda Ubuntu Playground](https://killercoda.com/playgrounds/scenario/ubuntu) | Disposable root Ubuntu VM in the browser | The 32 Linux labs |
+| [Killercoda Kubernetes Playground](https://killercoda.com/playgrounds/scenario/kubernetes) | A real cluster with `kubectl` ready — the Ubuntu playground has none | Lab 32 |
+| [Docker Desktop](https://www.docker.com/products/docker-desktop/) | Run the container labs locally on Windows, macOS or Linux (optional) | Labs 6, 12, 36 |
+
+> On Docker Desktop the engine is already running — skip any `apt install docker.io` and
+> `systemctl start docker` step. Everything else in the lab is identical.
+
 ### Free browser tools — nothing to install
 
 | Tool | What you use it for |
 |------|--------------------|
-| [Killercoda Ubuntu Playground](https://killercoda.com/playgrounds/scenario/ubuntu) | Disposable root Ubuntu VM — runs every lab |
 | [IP Calculator](https://alfredang.github.io/ipcalculator/) | Subnet/CIDR planning for the VPC and networking labs |
 | [PCAP Analyzer](https://alfredang.github.io/pcapanalyzer/) | Inspect packet captures from the network troubleshooting lab |
 | [Regex Generator](https://alfredang.github.io/regexgenerator/) | Build grok/regex patterns for the centralized logging lab |
@@ -155,9 +167,9 @@ The complete free-tool reference, with install commands and links, is in **[labs
 │   ├── README.md             # lab index by exam domain
 │   └── tools.md              # complete free-tool reference
 └── courseware/               # trainer & learner deliverables
-    ├── CompTIA Cloud+ Slides - v2.0.pptx / .pdf
-    ├── Learner Guide - CompTIA Cloud+ - v2.0.docx / .pdf
-    ├── Lesson Plan - CompTIA Cloud+ - v2.0.docx / .pdf
+    ├── CompTIA Cloud+ Slides - v2.1.pptx / .pdf
+    ├── Learner Guide - CompTIA Cloud+ - v2.1.docx / .pdf
+    ├── Lesson Plan - CompTIA Cloud+ - v2.1.docx / .pdf
     └── archive/              # superseded versions
 ```
 
