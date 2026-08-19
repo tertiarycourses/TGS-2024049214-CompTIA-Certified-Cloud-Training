@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh) and [`cleanup.sh`](cleanup.sh) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Install patching tools
@@ -146,3 +148,12 @@ docker run --rm -v app-data:/var/lib/app alpine cat /var/lib/app/keep.txt
 - Docker — https://www.docker.com
 - Pkgs.org (find current versions) — https://pkgs.org
 - endoflife.date — https://endoflife.date
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Steps 1-5 — provisions `nginx:1.24-alpine`, simulates minor patching, performs the major upgrade swap and proves volume data survives it. |
+| [`cleanup.sh`](cleanup.sh) | Step 7 decommission — commits the archival `web-decom-<date>` image, then removes the container, volume and old image. |

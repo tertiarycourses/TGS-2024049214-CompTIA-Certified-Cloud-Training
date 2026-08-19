@@ -1,0 +1,6 @@
+{
+  "Name": "users",
+  "Address": "svc-users",
+  "Port": 80,
+  "Check": {"HTTP": "http://svc-users/", "Interval": "10s"}
+}

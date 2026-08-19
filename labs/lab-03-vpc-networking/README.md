@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh) and [`cleanup.sh`](cleanup.sh) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Install tools
@@ -150,3 +152,12 @@ ip netns exec subnet-a ping -c 2 -W 2 8.8.8.8
 ## Free tools used
 - iproute2 / iptables (built-in)
 - TIS IP Calculator — https://alfredang.github.io/ipcalculator/
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Steps 1-6 — installs the tools, creates the namespaces, veth pairs, routes, the security-group DROP rule and the NAT gateway. |
+| [`cleanup.sh`](cleanup.sh) | Step 7 teardown — deletes the namespaces, the NAT veth and flushes the NAT POSTROUTING chain. |

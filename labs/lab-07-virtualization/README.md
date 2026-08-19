@@ -10,6 +10,8 @@ https://killercoda.com/playgrounds/scenario/ubuntu
 
 > Note: Killercoda runs nested under KVM, so we use **QEMU TCG** (software emulation) instead of full KVM acceleration. The concepts and commands are identical to a real hypervisor.
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh) and [`cleanup.sh`](cleanup.sh) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Install QEMU and libvirt tools
@@ -149,3 +151,12 @@ egrep -c '(vmx|svm)' /proc/cpuinfo
 - QEMU — https://www.qemu.org
 - libvirt / virt-install — https://libvirt.org
 - Alpine Linux ISO — https://alpinelinux.org
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Steps 1-5 — installs QEMU/libvirt, creates `vm1.qcow2`, the `vm2.qcow2` linked clone, checks CPU virtualization flags and fetches the Alpine ISO. |
+| [`cleanup.sh`](cleanup.sh) | Step 9 teardown — deletes the qcow2 disks and the Alpine ISO from `/var/vm`. |

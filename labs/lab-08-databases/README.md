@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh), [`cleanup.sh`](cleanup.sh), [`schema.sql`](schema.sql) and [`seed.js`](seed.js) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Install Docker
@@ -144,3 +146,14 @@ docker exec -i mongo mongosh --quiet --eval 'db.getSiblingDB("shop").customers.c
 - PostgreSQL — https://www.postgresql.org
 - MongoDB Community — https://www.mongodb.com/try/download/community
 - DB Fiddle (web SQL sandbox) — https://www.db-fiddle.com
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Steps 1-4 — starts Postgres and MongoDB, loads the relational schema and the nested-document equivalent. |
+| [`cleanup.sh`](cleanup.sh) | Step 7 teardown — removes the `pg` and `mongo` containers. |
+| [`schema.sql`](schema.sql) | Step 3 relational schema — the `customers`/`orders` tables, seed rows and the JOIN aggregate. |
+| [`seed.js`](seed.js) | Step 4 mongosh script — the same business data as nested documents plus the `$unwind`/`$group` aggregation. |

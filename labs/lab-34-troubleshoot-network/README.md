@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh), [`cleanup.sh`](cleanup.sh) and [`bad-resolv.conf`](bad-resolv.conf) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Install diagnostics
@@ -168,3 +170,13 @@ ping -c 4 1.1.1.1 | tail -2
 - chrony — https://chrony-project.org
 - TIS PCAP Analyzer — https://alfredang.github.io/pcapanalyzer/
 - HTTP status reference — https://httpstatuses.com
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Step 1, writes the broken resolver file and starts the Step 5 `web` container (the deliberate failures stay yours to reproduce). |
+| [`cleanup.sh`](cleanup.sh) | Teardown — removes the `web` container, the Step 4 MASQUERADE rule and namespace `p`, and the resolver file. |
+| [`bad-resolv.conf`](bad-resolv.conf) | Step 2 deliberately-unreachable resolver (`192.0.2.1`) used to reproduce the DNS failure. |

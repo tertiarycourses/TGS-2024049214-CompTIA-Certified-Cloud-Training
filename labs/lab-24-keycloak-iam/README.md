@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh), [`cleanup.sh`](cleanup.sh), [`realm.json`](realm.json), [`user-alice.json`](user-alice.json) and [`client-cli-app.json`](client-cli-app.json) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Run Keycloak
@@ -157,3 +159,15 @@ echo "$ALICE_TOKEN" | cut -d. -f2 | base64 -d 2>/dev/null | jq .realm_access
 - Keycloak — https://www.keycloak.org
 - jwt.io decoder (web) — https://jwt.io
 - OAuth.tools — https://oauth.tools
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Steps 1-7 — starts Keycloak, creates the `cloudplus` realm, the RBAC roles, user `alice`, the `cli-app` client, and decodes her JWT. |
+| [`cleanup.sh`](cleanup.sh) | Step 9 teardown — removes the `kc` container. |
+| [`realm.json`](realm.json) | Step 3 realm creation payload. |
+| [`user-alice.json`](user-alice.json) | Step 5 user creation payload for `alice`. |
+| [`client-cli-app.json`](client-cli-app.json) | Step 6 OAuth 2.0 public client payload. |

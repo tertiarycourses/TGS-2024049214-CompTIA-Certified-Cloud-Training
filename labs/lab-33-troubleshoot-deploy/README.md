@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh) and [`cleanup.sh`](cleanup.sh) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Setup
@@ -164,3 +166,12 @@ docker stats --no-stream
 ## Free tools used
 - Docker — https://www.docker.com
 - AWS / Azure / GCP region matrices (linked above)
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Step 1, pre-pulls every image the lab uses and starts the long-lived `web` and `limit` containers (the deliberate failures stay yours to reproduce). |
+| [`cleanup.sh`](cleanup.sh) | Teardown — removes the `web`, `limit` and `pg` containers and the `pgdata` volume. |

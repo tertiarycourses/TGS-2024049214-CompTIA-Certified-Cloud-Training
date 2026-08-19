@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh), [`cleanup.sh`](cleanup.sh) and [`service-users.json`](service-users.json) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Install Docker and create a network
@@ -137,3 +139,13 @@ docker ps --filter name=svc- --format '{{.Names}}\t{{.Status}}'
 ## Free tools used
 - HashiCorp Consul — https://www.consul.io
 - Docker — https://www.docker.com
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Steps 1-4 — creates the `cloudnet` network, starts Consul, deploys the three microservices and registers them. |
+| [`cleanup.sh`](cleanup.sh) | Step 8 teardown — removes the Consul and `svc-*` containers and the `cloudnet` network. |
+| [`service-users.json`](service-users.json) | Step 4 Consul service definition for `users`, extracted from the registration loop. |

@@ -10,6 +10,8 @@ https://killercoda.com/playgrounds/scenario/ubuntu
 
 > **Web tool:** Explore how these attacks look from the defender's side with the free browser **Cybersecurity Simulator** — https://alfredang.github.io/cybersecuritysimulator/.
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh) and [`cleanup.sh`](cleanup.sh) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Install Falco (modern eBPF mode)
@@ -142,3 +144,12 @@ curl -sI http://localhost:2801/ping | head -1
 - Falcosidekick — https://github.com/falcosecurity/falcosidekick
 - auditd (built-in) — https://github.com/linux-audit/audit-userspace
 - Wazuh (free SIEM) — https://wazuh.com
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Step 1 plus the supporting containers — installs Falco (with the container fallback), starts the `target` container and falcosidekick (the Step 3-5 triggers stay yours to fire). |
+| [`cleanup.sh`](cleanup.sh) | Step 8 teardown — removes the `target`, `falco` and `fsk` containers. |

@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh) and [`cleanup.sh`](cleanup.sh) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Run Vault in dev mode
@@ -145,3 +147,12 @@ docker exec vault tail -3 /vault/logs/audit.log
 - SOPS (alternative) — https://github.com/getsops/sops
 - age (file encryption) — https://github.com/FiloSottile/age
 - Mozilla SOPS + age + git — common GitOps secrets pattern
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Steps 1-5 — starts Vault in dev mode, writes and versions the KV secret, configures dynamic Postgres credentials and enables the file audit device. |
+| [`cleanup.sh`](cleanup.sh) | Step 7 teardown — removes the `vault` and `pg` containers. |

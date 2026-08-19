@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh), [`cleanup.sh`](cleanup.sh) and [`exclusions.conf`](exclusions.conf) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Run a pre-built Nginx + ModSecurity image
@@ -136,3 +138,13 @@ docker exec waf tail -20 /var/log/modsec/modsec_audit.log
 - ModSecurity — https://github.com/owasp-modsecurity/ModSecurity
 - OWASP Core Rule Set — https://coreruleset.org
 - Cloudflare WAF (free tier) — https://www.cloudflare.com/application-services/products/waf
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Step 1 — starts the Nginx + ModSecurity + OWASP CRS container at paranoia level 1 (the Step 2-5 attack probes stay yours to fire). |
+| [`cleanup.sh`](cleanup.sh) | Step 9 teardown — removes the `waf` container. |
+| [`exclusions.conf`](exclusions.conf) | Step 7 false-positive tuning rule — removes CRS rule 941100. |

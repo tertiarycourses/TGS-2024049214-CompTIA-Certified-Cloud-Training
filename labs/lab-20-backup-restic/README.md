@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh) and [`cleanup.sh`](cleanup.sh) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Install restic and MinIO (off-site target)
@@ -161,3 +163,12 @@ docker exec minio mc ls local/backups/
 - MinIO — https://min.io
 - Borg (alternative) — https://www.borgbackup.org
 - Duplicity (alternative) — https://duplicity.gitlab.io
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Steps 1-3 — installs restic, starts MinIO as the off-site S3 target, initialises the encrypted repo and takes the FULL backup. |
+| [`cleanup.sh`](cleanup.sh) | Step 11 teardown — removes MinIO and deletes `/data/app` and `/restore`. |

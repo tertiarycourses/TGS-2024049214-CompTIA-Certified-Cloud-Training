@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh) and [`cleanup.sh`](cleanup.sh) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Install OpenSSH server and Google Authenticator
@@ -150,3 +152,12 @@ ufw status verbose
 - Google Authenticator PAM — https://github.com/google/google-authenticator-libpam
 - FreeOTP (mobile, free) — https://freeotp.github.io
 - Authy / Microsoft Authenticator — free mobile apps
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Steps 1-6 — installs sshd and the TOTP PAM module, generates the ed25519 key, enforces key+MFA, starts the private app and locks the bastion to 10.0.0.0/8. |
+| [`cleanup.sh`](cleanup.sh) | Step 8 teardown — removes the app container and reverts the `AuthenticationMethods` and PAM MFA lines. |

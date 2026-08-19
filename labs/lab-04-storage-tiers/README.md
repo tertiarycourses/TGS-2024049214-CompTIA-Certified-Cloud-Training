@@ -8,6 +8,8 @@ Run all commands on the **Killercoda Ubuntu Playground**:
 
 https://killercoda.com/playgrounds/scenario/ubuntu
 
+> **Ready-made files:** this lab ships [`setup.sh`](setup.sh) and [`cleanup.sh`](cleanup.sh) — run `bash setup.sh` to build everything in one go, or follow the steps below to type it yourself.
+
 ---
 
 ## Step 1 — Install tools
@@ -134,3 +136,12 @@ exportfs -v
 - MinIO — https://min.io
 - NFS kernel server (built-in)
 - fio — https://github.com/axboe/fio
+
+---
+
+## Files in this lab
+
+| File | Purpose |
+|------|---------|
+| [`setup.sh`](setup.sh) | Runs Steps 1-4 — installs fio/NFS/Docker, builds the loopback block device, starts MinIO with `hot-bucket`, and exports the NFS share. |
+| [`cleanup.sh`](cleanup.sh) | Step 7 teardown — unmounts `/mnt/block` and `/mnt/file`, detaches the loop device, removes MinIO and stops the NFS server. |
