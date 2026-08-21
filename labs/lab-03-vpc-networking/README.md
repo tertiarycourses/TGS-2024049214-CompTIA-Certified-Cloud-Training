@@ -98,6 +98,10 @@ This is the equivalent of an AWS Security Group / Azure NSG / GCP Firewall rule.
 ## Step 6 — Add NAT gateway to the internet
 
 ```bash
+ip netns add router
+ip netns add subnet-a
+ip netns add subnet-b
+
 ip link add nat-r type veth peer name r-nat
 ip link set r-nat netns router
 ip addr add 192.168.99.1/24 dev nat-r
@@ -107,7 +111,12 @@ ip -n router link set r-nat up
 ip -n router route add default via 192.168.99.1
 
 sysctl -w net.ipv4.ip_forward=1
-iptables -t nat -A POSTROUTING -s 10.0.0.0/16 -o eth0 -j MASQUERADE
+ip netns exec router sysctl -w net.ipv4.ip_forward=1
+
+iptables -t nat -A POSTROUTING -s 10.0.0.0/16 -o enp1s0 -j MASQUERADE
+
+ip netns exec subnet-a route add default gw 10.0.1.1
+ip netns exec subnet-b route add default gw 10.0.2.1
 
 ip netns exec subnet-a ping -c 2 8.8.8.8 || echo "Outbound test"
 ```
