@@ -102,7 +102,7 @@ docker start az1
 cat > /etc/keepalived/keepalived.conf <<'EOF'
 vrrp_instance VI_1 {
     state MASTER
-    interface eth0
+    interface enp1s0
     virtual_router_id 51
     priority 100
     advert_int 1
@@ -112,7 +112,7 @@ vrrp_instance VI_1 {
 EOF
 
 systemctl start keepalived
-ip -brief addr show eth0
+ip -brief addr show enp1s0
 ```
 
 The VIP `10.0.0.250` is now floating on this node. In a real two-node setup, when MASTER dies the BACKUP picks up the VIP within ~3 seconds — this is how regional **active-passive** load balancers achieve HA.
