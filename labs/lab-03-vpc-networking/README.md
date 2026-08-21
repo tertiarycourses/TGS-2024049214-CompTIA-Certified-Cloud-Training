@@ -147,9 +147,16 @@ ip netns exec subnet-a ip route show
 ip netns exec subnet-a ping -c 2 10.0.2.10
 ip netns exec router iptables -L FORWARD -n --line-numbers
 ip netns exec subnet-a ping -c 2 -W 2 8.8.8.8
+iptables -t nat -L POSTROUTING -n -v
 ```
 
-**Expected:** Run this before Step 7. `ip netns list` shows `subnet-a`, `subnet-b` and `router`; `subnet-a` has a `default via 10.0.1.1` route; the ping to `10.0.2.10` gets **2 packets transmitted, 2 received, 0% packet loss** across the router (VPC peering works); the FORWARD chain shows the `DROP ... icmp` rule from 10.0.2.0/24 to 10.0.1.0/24 (the security group); and the ping to `8.8.8.8` leaves through the NAT MASQUERADE rule.
+**Expected:** Run this before Step 7. `ip netns list` 
+subnet-a, subnet-b, router              → PASS
+default via 10.0.1.1                    → PASS
+10.0.2.10 ping: 2 received, 0% loss     → PASS
+FORWARD DROP rule 10.0.2.0/24 → 10.0.1.0/24 → PASS
+8.8.8.8 ping: 2 received, 0% loss       → PASS
+MASQUERADE on enp1s0                    → PASS
 
 ---
 
