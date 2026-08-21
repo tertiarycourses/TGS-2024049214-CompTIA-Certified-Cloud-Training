@@ -84,10 +84,10 @@ Clients now resolve `users.service.consul` instead of hard-coded IPs — the **s
 Simulate one request triggering parallel calls to all three services (event fan-out).
 
 ```bash
-docker run --rm --network cloudnet alpine sh -c "
-  apk add --quiet curl
+docker run --rm --network cloudnet --dns 8.8.8.8 alpine sh -c "
+  apk add --no-cache curl
   for s in users orders payments; do
-    (curl -s http://svc-$s/ &)
+    (wget -qO- http://svc-\$s/ &)
   done
   wait
 "
