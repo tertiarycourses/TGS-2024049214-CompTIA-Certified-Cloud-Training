@@ -100,8 +100,10 @@ This is the equivalent of an AWS Security Group / Azure NSG / GCP Firewall rule.
 ```bash
 ip route add 10.0.0.0/16 via 192.168.99.2 dev nat-r 2>/dev/null
 sysctl -w net.ipv4.ip_forward=1
-iptables -A FORWARD -s 10.0.0.0/16 -o enp1s0 -j ACCEPT
-iptables -A FORWARD -i enp1s0 -d 10.0.0.0/16 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+iptables -A FORWARD -i nat-r -o enp1s0 -s 10.0.0.0/16 -j ACCEPT
+iptables -A FORWARD -i enp1s0 -o nat-r -d 10.0.0.0/16 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
 iptables -t nat -A POSTROUTING -s 10.0.0.0/16 -o enp1s0 -j MASQUERADE
 
 ip netns exec subnet-a ping -c 2 -W 2 8.8.8.8
