@@ -71,8 +71,8 @@ curl -s http://localhost:8500/v1/catalog/services | jq
 Consul exposes service names over DNS on port 8600.
 
 ```bash
-docker run --rm --network cloudnet --dns 172.17.0.1 alpine \
-  sh -c "apk add --quiet bind-tools && dig @consul -p 8600 users.service.consul"
+docker run --rm --network cloudnet --dns 8.8.8.8 alpine \
+  sh -c "ping -c 2 consul && wget -qO- http://consul:8500/v1/health/service/users"
 ```
 
 Clients now resolve `users.service.consul` instead of hard-coded IPs — the **service discovery** primitive of every cloud-native platform.
