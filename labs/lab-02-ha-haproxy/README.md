@@ -136,7 +136,7 @@ Run these checks to prove the lab worked before you move on:
 docker ps --filter name=az1 --filter name=az2 --format '{{.Names}}\t{{.Status}}'
 for i in 1 2 3 4; do curl -s http://localhost/; done
 systemctl is-active haproxy
-ip -brief addr show eth0 | grep 10.0.0.250
+ip -brief addr show enp1s0| grep /24
 ```
 
 **Expected:** Run this before Step 7. Both `az1` and `az2` show as **Up**, the four `curl` calls through HAProxy alternate `AZ-1 healthy` / `AZ-2 healthy` (round-robin across the two simulated availability zones), `haproxy` reports `active`, and the Keepalived VIP `10.0.0.250/24` is listed on `eth0`.
